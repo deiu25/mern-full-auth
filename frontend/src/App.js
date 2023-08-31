@@ -6,6 +6,7 @@ import { Forgot } from './pages/auth/Forgot';
 import { Reset } from './pages/auth/Reset';
 import { LoginWithCode } from './pages/auth/LoginWithCode';
 import { Verify } from './pages/auth/Verify';
+import { Profile } from './pages/profile/Profile';
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
        
         <Route path="/verify/:verificationToken" element={<Leyout>
           <Verify />
+        </Leyout>} />
+
+        <Route path="/profile" element={<Leyout>
+          <Profile />
         </Leyout>} />
       </Routes>
     </BrowserRouter>
