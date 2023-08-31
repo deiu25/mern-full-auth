@@ -37,7 +37,7 @@ export const Header = () => {
         <ul>
           <li>
             <button className="--btn --btn-primary">
-              <Link to="/login">Login</Link>
+              <Link to="/auth">Auth</Link>
             </button>
           </li>
           <li>
