@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import profileImg from "../../assets/avatarr.png";
+import { PageMenu } from "../../components/pageMenu/PageMenu";
 
 const initialState = {
     name: "Deiu",
@@ -19,8 +20,10 @@ export const Profile = () => {
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
+                
                 <div className="col-12 col-md-8">
                     <div className="card">
+                    <PageMenu />
                         <div className="card-header text-center">
                             <h2>Profile</h2>
                         </div>

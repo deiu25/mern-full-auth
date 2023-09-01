@@ -1,5 +1,5 @@
 import React from 'react'
-import './Home.css'
+import './Home.scss'
 import loginImg from '../../assets/login.svg'
 
 export const Home = () => {

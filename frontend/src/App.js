@@ -7,6 +7,8 @@ import { Reset } from './pages/auth/Reset';
 import { LoginWithCode } from './pages/auth/LoginWithCode';
 import { Verify } from './pages/auth/Verify';
 import { Profile } from './pages/profile/Profile';
+import { ChangePassword } from './pages/changePassword/ChangePassword';
+import { UserList } from './pages/userList/UserList';
 
 function App() {
   return (
@@ -28,6 +30,12 @@ function App() {
 
         <Route path="/profile" element={<Leyout>
           <Profile />
+        </Leyout>} />
+        <Route path="/changePassword" element={<Leyout>
+          <ChangePassword />
+        </Leyout>} />
+        <Route path="/users" element={<Leyout>
+          <UserList />
         </Leyout>} />
       </Routes>
     </BrowserRouter>
