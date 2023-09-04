@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const userRoute = require('./routes/userRoute')
 
 const app = express()
 
@@ -16,6 +17,11 @@ app.use(cors(
         credentials: true
     })
 ))
+
+//Routes
+app.use('/api/users', userRoute)
+
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
