@@ -5,6 +5,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const userRoute = require('./routes/userRoute')
+const errorHandler = require('./middleware/errorMiddleware')
 
 const app = express()
 
@@ -28,6 +29,9 @@ app.use(cookieParser())
 app.get('/', (req, res) => {
     res.send('Home Page')
 })
+
+//Error Handler Middleware
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
