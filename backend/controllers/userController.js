@@ -227,20 +227,30 @@ const updateUser = asyncHandler(async (req, res) => {
     }
   });
 
-  // Delete User
+// Delete User
 const deleteUser = asyncHandler(async (req, res) => {
-    const user = User.findById(req.params.id);
-  
-    if (!user) {
-      res.status(404);
-      throw new Error("User not found");
-    }
-  
-    await user.remove();
-    res.status(200).json({
-      message: "User deleted successfully",
-    });
+  const result = await User.deleteOne({ _id: req.params.id });
+
+  if (result.deletedCount === 0) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  res.status(200).json({
+    message: "User deleted successfully",
   });
+});
+
+// Get Users
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find().sort("-createdAt").select("-password");
+  if (!users) {
+    res.status(500);
+    throw new Error("Something went wrong");
+  }
+  res.status(200).json(users);
+});
+
 
 module.exports = {
     registerUser,
@@ -249,4 +259,5 @@ module.exports = {
     getUser,
     updateUser,
     deleteUser,
+    getUsers,
 };
