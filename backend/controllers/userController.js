@@ -14,10 +14,10 @@ const cryptr = new Cryptr(process.env.CRYPTR_KEY);
 
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
+    const { firstname, lastname, email, password } = req.body;
   
     // Validation
-    if (!name || !email || !password) {
+    if (!firstname || !lastname || !email || !password) {
       res.status(400);
       throw new Error("Please fill in all the required fields.");
     }
@@ -41,7 +41,8 @@ const registerUser = asyncHandler(async (req, res) => {
   
     //   Create new user
     const user = await User.create({
-      name,
+      firstname,
+      lastname,
       email,
       password,
       userAgent,
@@ -60,11 +61,12 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   
     if (user) {
-      const { _id, name, email, phone, bio, photo, role, isVerified } = user;
+      const { _id, firname, lastname, email, phone, bio, photo, role, isVerified } = user;
   
       res.status(201).json({
         _id,
-        name,
+        firname,
+        lastname,
         email,
         phone,
         bio,
@@ -147,11 +149,12 @@ const registerUser = asyncHandler(async (req, res) => {
         secure: true,
       });
   
-      const { _id, name, email, phone, bio, photo, role, isVerified } = user;
+      const { _id, firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
   
       res.status(200).json({
         _id,
-        name,
+        firstname,
+        lastname,
         email,
         phone,
         bio,
@@ -183,11 +186,12 @@ const getUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
   
     if (user) {
-      const { _id, name, email, phone, bio, photo, role, isVerified } = user;
+      const { _id, firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
   
       res.status(200).json({
         _id,
-        name,
+        firstname,
+        lastname,
         email,
         phone,
         bio,
@@ -206,10 +210,11 @@ const updateUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
   
     if (user) {
-      const { name, email, phone, bio, photo, role, isVerified } = user;
+      const { firname, lastname, email, phone, bio, photo, role, isVerified } = user;
   
       user.email = email;
-      user.name = req.body.name || name;
+      user.firstname = req.body.firstname || firname;
+      user.lastname = req.body.lastname || lastname;
       user.phone = req.body.phone || phone;
       user.bio = req.body.bio || bio;
       user.photo = req.body.photo || photo;
@@ -218,7 +223,8 @@ const updateUser = asyncHandler(async (req, res) => {
   
       res.status(200).json({
         _id: updatedUser._id,
-        name: updatedUser.name,
+        firname: updatedUser.firname,
+        lastname: updatedUser.lastname,
         email: updatedUser.email,
         phone: updatedUser.phone,
         bio: updatedUser.bio,

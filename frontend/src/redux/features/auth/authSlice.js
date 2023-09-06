@@ -42,17 +42,16 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state) => {
         state.isLoading = true;
-        }
-    );
-    builder.addCase(registerUser.fulfilled, (state, action) => {
+        })
+        .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccessful = true;
         state.isLoggedIn = true;
         state.user = action.payload;
+        console.log(action.payload);
         toast.success("Registration successful");
-        }
-    );
-    builder.addCase(registerUser.rejected, (state, action) => {
+        })
+        .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isErrored = true;
         state.message = action.payload;

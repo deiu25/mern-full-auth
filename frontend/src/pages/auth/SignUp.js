@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../redux/features/auth/authService";
+import { useDispatch, useSelector } from "react-redux";
+import { RESET } from "../../redux/features/auth/authSlice";
+import { Loader } from "../../components/loader/Loader";
 
 const initialState = {
   firstname: "",
@@ -16,12 +19,17 @@ export const SignUp = () => {
   const [formData, setFormData] = useState(initialState);
   const { firstname, lastname, email, password, confirmPassword } = formData;
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isLoading, isLoggedIn, isSuccess, message  } = useSelector((state) => state.auth);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
     if (!firstname || !lastname || !email || !password || !confirmPassword) {
       return toast.error("Please fill in all fields");
@@ -42,8 +50,17 @@ export const SignUp = () => {
       email,
       password,
   };
-  console.log(userData);
+  //console.log(userData);
+
+  await dispatch(registerUser(userData));
   };
+
+  useEffect(() => {
+    if (isSuccess && isLoggedIn) {
+      navigate("/profile");
+    }
+    dispatch(RESET());
+  }, [isSuccess, isLoggedIn, navigate, dispatch]);
 
   const [uCase, setUCase] = useState(false);
   const [num, setNum] = useState(false);
@@ -58,7 +75,7 @@ export const SignUp = () => {
   };
 
   useEffect(() => {
-    if (password.length > 7) {
+    if (password.length > 5) {
       setPassLength(true);
     } else {
       setPassLength(false);
@@ -70,7 +87,7 @@ export const SignUp = () => {
       setUCase(false);
     }
 
-    if (password.match(/[0-9]/)) {
+    if (password.match(/[0-7]/)) {
       setNum(true);
     } else {
       setNum(false);
@@ -87,6 +104,7 @@ export const SignUp = () => {
   return (
     <div className="card-back">
       <div className="center-wrap">
+        {isLoading && <Loader />}
         <div className="section text-center">
           <svg
             fill="none"
@@ -179,7 +197,7 @@ export const SignUp = () => {
           <div className="password-info">
             <div className="password-info-item">
               {switchIcon(passLength)}
-              At least 8 characters
+              At least 6 characters
             </div>
             <div className="password-info-item">
               {switchIcon(uCase)}
