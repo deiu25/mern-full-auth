@@ -1,6 +1,7 @@
 import React from 'react'
 import './Home.scss'
 import loginImg from '../../assets/login.svg'
+import { Link } from 'react-router-dom'
 
 export const Home = () => {
   return (
@@ -13,7 +14,9 @@ export const Home = () => {
         <p>Take the first step!</p>
         <p>Discover more.</p>
         <div className='hero-buttons --flex-start'>
-          <button className='--btn --btn-danger'>Get Started</button>
+          <button className='--btn --btn-danger'>
+            <Link to='/auth'>Auth</Link>
+          </button>
           <button className='--btn --btn-primary'>Learn More</button>
         </div>
         </div>

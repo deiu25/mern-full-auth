@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { validateEmail } from "../../redux/features/auth/authService";
 
 const initialState = {
   firstname: "",
@@ -21,11 +23,26 @@ export const SignUp = () => {
 
   const registerUser = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("The passwords do not match!");
-      return;
+    if (!firstname || !lastname || !email || !password || !confirmPassword) {
+      return toast.error("Please fill in all fields");
     }
-    console.log("Înregistrare utilizator cu următoarele date:", formData);
+    if (password.length < 6) {
+      return toast.error("Password must be at least 6 characters");
+    }
+    if (password !== confirmPassword) {
+      return toast.error("Passwords do not match");
+    }
+    if (!validateEmail(email)) {
+      return toast.error("Invalid email");
+    }
+
+    const userData = {
+      firstname,
+      lastname,
+      email,
+      password,
+  };
+  console.log(userData);
   };
 
   const [uCase, setUCase] = useState(false);
@@ -139,6 +156,10 @@ export const SignUp = () => {
               required
               value={password}
               onChange={handleInputChange}
+              OnPaste={(e) => {e.preventDefault();
+              toast.error("You can't paste here");
+            return false;
+            }}
             />
             <PasswordInput
               className="form-style"
@@ -149,6 +170,10 @@ export const SignUp = () => {
               required
               value={confirmPassword}
               onChange={handleInputChange}
+              OnPaste={(e) => {e.preventDefault();
+                toast.error("You can't paste here");
+              return false;
+              }}
             />
           </form>
           <div className="password-info">

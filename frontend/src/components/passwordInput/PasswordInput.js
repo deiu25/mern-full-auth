@@ -24,7 +24,7 @@ export const PasswordInput = ({
         id="password"
         autoComplete="off"
         onChange={onChange}
-        onAbort={OnPaste}
+        onPaste={OnPaste}
       />
       <i className="input-icon uil uil-lock-alt"></i>
       <i
