@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RESET, logout } from "../../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { ShowOnLogin, ShowOnLogout } from "../protect/hiddenLink";
+import { UserName } from "../../pages/profile/Profile";
 
 const activeLink = ({ isActive }) => (isActive ? "active" : "");
 
@@ -55,7 +56,7 @@ export const Header = () => {
           <ShowOnLogin>
           <li>
             <NavLink to="/profile" className={activeLink}>
-              Profile
+              <UserName />
             </NavLink>
           </li>
           
