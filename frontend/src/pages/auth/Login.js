@@ -26,7 +26,7 @@ export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, isLoggedIn, isSuccess, message } = useSelector(
+  const { isLoading, isLoggedIn, isSuccess } = useSelector(
     (state) => state.auth
   );
 
@@ -44,7 +44,6 @@ export const Login = () => {
       email,
       password,
     };
-    //console.log(userData);
     await dispatch(login(userData));
   };
 

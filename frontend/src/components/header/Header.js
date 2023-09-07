@@ -1,21 +1,30 @@
 import React from "react";
 import "./Header.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { RESET, logout } from "../../redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const activeLink = ({ isActive }) => (isActive ? "active" : "");
 
 export const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const goHome = () => {
     navigate("/");
+  };
+
+  const logoutUser = async () => {
+    dispatch(RESET());
+    await dispatch(logout());
+    navigate("/auth");
   };
 
   return (
     <header>
       <nav>
         <div className="logo" onClick={goHome}>
-          Syntax Seekers
+          Syntax Seeker
         </div>
         <input type="checkbox" id="checkbox" />
         <label htmlFor="checkbox" id="icon">
@@ -46,7 +55,7 @@ export const Header = () => {
             </NavLink>
           </li>
           <li>
-            <button className="--btn --btn-secondary">Logout</button>
+            <button onClick={logoutUser} className="--btn --btn-secondary">Logout</button>
           </li>
         </ul>
       </nav>

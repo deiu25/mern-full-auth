@@ -22,7 +22,7 @@ export const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, isLoggedIn, isSuccess, message  } = useSelector((state) => state.auth);
+  const { isLoading, isLoggedIn, isSuccess } = useSelector((state) => state.auth);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
