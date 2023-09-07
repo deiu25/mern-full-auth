@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../redux/features/auth/authService";
 import { useDispatch, useSelector } from "react-redux";
-import { RESET } from "../../redux/features/auth/authSlice";
+import { register, RESET } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
 
 const initialState = {
@@ -52,7 +52,7 @@ export const SignUp = () => {
   };
   //console.log(userData);
 
-  await dispatch(registerUser(userData));
+  await dispatch(register(userData));
   };
 
   useEffect(() => {
@@ -109,7 +109,7 @@ export const SignUp = () => {
           <svg
             fill="none"
             stroke="currentColor"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -117,8 +117,8 @@ export const SignUp = () => {
             height="50"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
             ></path>
           </svg>
@@ -193,7 +193,7 @@ export const SignUp = () => {
               return false;
               }}
             />
-          </form>
+          
           <div className="password-info">
             <div className="password-info-item">
               {switchIcon(passLength)}
@@ -212,9 +212,10 @@ export const SignUp = () => {
               At least 1 special character
             </div>
           </div>
-          <button type="submit" className="btn mt-4" onClick={registerUser}>
+          <button type="submit" className="btn mt-4">
             Submit
           </button>
+          </form>
           <p className="mb-0 mt-4 text-center">
             <Link to="/forgot">Forgot your password?</Link>
           </p>

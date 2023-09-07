@@ -20,6 +20,8 @@
   --color-primary: #007bff;
   --color-success: #28a745;
   --color-danger: orangered;
+
+  --color-dkgrey: #1f2029;
 }
 
 * {
@@ -35,7 +37,7 @@ html {
 
 body {
   font-family: var(--font-family);
-  background: #eee;
+  background-color: var(--color-dkgrey);
 }
 
 section {

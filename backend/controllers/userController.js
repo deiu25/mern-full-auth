@@ -61,11 +61,11 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   
     if (user) {
-      const { _id, firname, lastname, email, phone, bio, photo, role, isVerified } = user;
+      const { _id, firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
   
       res.status(201).json({
         _id,
-        firname,
+        firstname,
         lastname,
         email,
         phone,
@@ -210,10 +210,10 @@ const updateUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
   
     if (user) {
-      const { firname, lastname, email, phone, bio, photo, role, isVerified } = user;
+      const { firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
   
       user.email = email;
-      user.firstname = req.body.firstname || firname;
+      user.firstname = req.body.firstname || firstname;
       user.lastname = req.body.lastname || lastname;
       user.phone = req.body.phone || phone;
       user.bio = req.body.bio || bio;
@@ -223,7 +223,7 @@ const updateUser = asyncHandler(async (req, res) => {
   
       res.status(200).json({
         _id: updatedUser._id,
-        firname: updatedUser.firname,
+        firstname: updatedUser.firstname,
         lastname: updatedUser.lastname,
         email: updatedUser.email,
         phone: updatedUser.phone,

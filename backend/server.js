@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:30000", "https://mernd-full-auth.vercel.app"],
+    origin: ["http://localhost:3000", "https://mernd-full-auth.vercel.app"],
     credentials: true,
   })
 );
