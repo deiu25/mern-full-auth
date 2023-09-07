@@ -3,6 +3,7 @@ import "./Header.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RESET, logout } from "../../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
+import { ShowOnLogin, ShowOnLogout } from "../protect/hiddenLink";
 
 const activeLink = ({ isActive }) => (isActive ? "active" : "");
 
@@ -44,19 +45,24 @@ export const Header = () => {
           </svg>
         </label>
         <ul>
+          <ShowOnLogout>
           <li>
             <button className="btn">
               <Link className="btn btn-primary" to="/auth">Auth</Link>
             </button>
           </li>
+          </ShowOnLogout>
+          <ShowOnLogin>
           <li>
             <NavLink to="/profile" className={activeLink}>
               Profile
             </NavLink>
           </li>
+          
           <li>
             <button onClick={logoutUser} className="--btn --btn-secondary">Logout</button>
           </li>
+          </ShowOnLogin>
         </ul>
       </nav>
     </header>
