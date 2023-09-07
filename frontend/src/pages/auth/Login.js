@@ -1,17 +1,63 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";
+import { useDispatch, useSelector } from "react-redux";
+import { Loader } from "../../components/loader/Loader";
+import { toast } from "react-toastify";
+import { validateEmail } from "../../redux/features/auth/authService";
+import {login, RESET } from "../../redux/features/auth/authSlice";
+
+
+const initialState = {
+  email: "",
+  password: "",
+};
+
 
 export const Login = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [formData, setFormData] = useState(initialState);
+  const { email, password } = formData;
 
-  const handleInputChange = (e) => {};
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const loginUser = (e) => {};
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isLoading, isLoggedIn, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      return toast.error("Please fill in all fields");
+    }
+    if (!validateEmail(email)) {
+      return toast.error("Invalid email");
+    }
+
+    const userData = {
+      email,
+      password,
+    };
+    //console.log(userData);
+    await dispatch(login(userData));
+  };
+
+  useEffect(() => {
+    if (isSuccess && isLoggedIn) {
+      navigate("/profile");
+    }
+    dispatch(RESET());
+  }, [isSuccess, isLoggedIn, navigate]);
 
   return (
     <div className="card-front">
+      {isLoading && <Loader />}
       <div className="center-wrap">
         <div className="section text-center">
           <svg
