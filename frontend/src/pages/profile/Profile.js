@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import profileImg from "../../assets/avatarr.png";
 import { PageMenu } from "../../components/pageMenu/PageMenu";
+import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutUser";
 
 const initialState = {
     firstname: "Damilola",
@@ -14,6 +15,7 @@ const initialState = {
 };
 
 export const Profile = () => {
+    useRedirectLoggedOutUser("/auth");
     const [profile, setProfile] = useState(initialState)
     const handleImgChange = (e) => {}
     const handleInputChange = (e) => {}
