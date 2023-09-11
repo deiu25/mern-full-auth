@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../redux/features/auth/authService";
 import { useDispatch, useSelector } from "react-redux";
-import { register, RESET } from "../../redux/features/auth/authSlice";
+import { register, RESET, sendVerificationEmail } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
 
 const initialState = {
@@ -53,6 +53,7 @@ export const SignUp = () => {
   //console.log(userData);
 
   await dispatch(register(userData));
+  await dispatch(sendVerificationEmail());
   };
 
   useEffect(() => {

@@ -6,9 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser, selectUser, updateUser } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
+import { Notification } from "../../components/notification/Notification";
 
-const cloud_name = "dvstsvpyz";
-const upload_preset = "mggsobep";
+const cloud_name = process.env.REACT_APP_CLOUD_NAME;
+const upload_preset = process.env.REACT_APP_UPLOAD_PRESET;
+
+const shortenText = (text, maxLength) => {
+  if (text.length > maxLength) {
+    const shortened = text.substr(0, maxLength) + "...";
+    return shortened;
+  }
+  return text;
+};
 
 export const Profile = () => {
   useRedirectLoggedOutUser("/auth");
@@ -104,6 +113,9 @@ export const Profile = () => {
   }, [user]);
 
   return (
+    <>
+    {isLoading && <Loader />}
+    {!profile.isVerified && <Notification />}
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-12 col-md-8">
@@ -204,11 +216,14 @@ export const Profile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
 export const UserName = () => {
-    const user = useSelector(selectUser);
-    const username = user?.lastname || "...";
-    return <span>{username}</span>;
-}
+  const user = useSelector(selectUser);
+  const lastName = user?.lastname || "...";
+  const shortenedLastName = shortenText(lastName, 9);
+  return <span>{shortenedLastName}</span>;
+};
+
