@@ -7,8 +7,8 @@ import { getUser, selectUser, updateUser } from "../../redux/features/auth/authS
 import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 
-const cloud_name = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
-const upload_preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+const cloud_name = "dvstsvpyz";
+const upload_preset = "mggsobep";
 
 export const Profile = () => {
   useRedirectLoggedOutUser("/auth");
@@ -65,7 +65,7 @@ export const Profile = () => {
 
         //Save image to cloudinary
         const response = await fetch(
-          `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+          "https://api.cloudinary.com/v1_1/dvstsvpyz/image/upload",
           { method: "POST", body: image }
         );
         const imgData = await response.json();
