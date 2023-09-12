@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";
+import { Loader } from "../../components/loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { RESET, resetPassword } from "../../redux/features/auth/authSlice";
+import { toast } from "react-toastify";
 //import "./style.css";
 
 const initialState = {
@@ -11,20 +15,17 @@ const initialState = {
 export const Reset = () => {
   const [formData, setFormData] = useState(initialState);
   const { password, confirmPassword } = formData;
+  const { resetToken } = useParams();
+  console.log(resetToken);
+
+  const { isLoading, isLoggedIn, isSuccess, message } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handlePasswordReset = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      console.log("Passwords do not match!");
-      return;
-    }
-    // Call to backend or API to actually reset the password
-    console.log(`Password has been reset.`);
   };
 
   const [uCase, setUCase] = useState(false);
@@ -65,9 +66,47 @@ export const Reset = () => {
     }
   }, [password]);
 
+
+  const reset = async (e) => {
+    e.preventDefault();
+    
+    if (password.length <= 7) {
+      return toast.error("Password must be at least 8 characters long.");
+    }
+    if (!password.match(/[A-Z]/)) {
+      return toast.error(
+        "Password must contain at least one uppercase letter."
+      );
+    }
+    if (!password.match(/[0-9]/)) {
+      return toast.error("Password must contain at least one number.");
+    }
+    if (!password.match(/[!@#$%^&*]/)) {
+      return toast.error(
+        "Password must contain at least one special character."
+      );
+    }
+    if (password !== confirmPassword) {
+      return toast.error("Passwords do not match!");
+    }
+
+    const userData = { password, confirmPassword };
+
+    await dispatch(resetPassword(userData, resetToken));
+    navigate("/auth");
+  };
+
+  useEffect(() => {
+    if (isSuccess && message.includes("Reset Successful")) {
+      navigate("/auth");
+    }
+    dispatch(RESET());
+  }, [dispatch, navigate, isSuccess, message]);
+
   return (
     <div className="section full-bg">
       <div className="container">
+        {isLoading && <Loader />}
         <div className="row full-height justify-content-center">
           <div className="col-12 text-center align-self-center py-5">
             <div className="section pb-5 pt-5 pt-sm-2 text-center">
@@ -96,11 +135,11 @@ export const Reset = () => {
                         <p className="text-light --text-center --fw-bold">
                           Enter your new password below.
                         </p>
-                        <form onSubmit={handlePasswordReset}>
+                        <form onSubmit={reset}>
                           <div className="form-group">
                             <PasswordInput
                               className="form-style"
-                              id="password"
+                              id="newPassword"
                               autoComplete="off"
                               placeholder="Password"
                               name="password"
@@ -112,7 +151,7 @@ export const Reset = () => {
                           <div className="form-group">
                             <PasswordInput
                               className="form-style"
-                              id="password"
+                              id="repeatPassword"
                               autoComplete="off"
                               placeholder="Repeat Password"
                               name="confirmPassword"
