@@ -78,7 +78,7 @@ const resetPassword = async (userData, resetToken) => {
   return response.data.message;
 };
 
-// fORGOT Password
+// Forgot Password
 const forgotPassword = async (userData) => {
   const response = await axios.post(API_URL + "forgotPassword", userData);
 

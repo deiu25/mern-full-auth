@@ -12,6 +12,7 @@ import {
   logout,
 } from "../../redux/features/auth/authSlice";
 import { Spinner } from "../../components/loader/Loader";
+import { sendAutomatedEmail } from "../../redux/features/email/emailSlice";
 
 const initialState = {
   oldPassword: "",
@@ -106,6 +107,14 @@ export const ChangePassword = () => {
       newPassword,
     };
 
+    const emailData = {
+      subject: "Password Changed - SyntaxSeeker",
+      send_to: user.email,
+      reply_to: "noreply@syntaxseeker.com",
+      template: "changePassword",
+      url: "/forgot",
+    }
+
     try {
       await dispatch(changePassword(userData));
 
@@ -113,6 +122,7 @@ export const ChangePassword = () => {
         throw new Error(error);
       }
 
+      await dispatch(sendAutomatedEmail(emailData));
       await dispatch(logout());
       await dispatch(RESET(userData));
       navigate("/auth");
