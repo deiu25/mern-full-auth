@@ -1,6 +1,17 @@
+import "./ChangePassword.scss";
 import React, { useEffect, useState } from "react";
 import { PageMenu } from "../../components/pageMenu/PageMenu";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";
+import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutUser";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import {
+  RESET,
+  changePassword,
+  logout,
+} from "../../redux/features/auth/authSlice";
+import { Spinner } from "../../components/loader/Loader";
 
 const initialState = {
   oldPassword: "",
@@ -9,22 +20,19 @@ const initialState = {
 };
 
 export const ChangePassword = () => {
-  const [formData, setFormData] = useState(initialState);
+  //useRedirectLoggedOutUser("/auth");
 
+  const [formData, setFormData] = useState(initialState);
   const { oldPassword, newPassword, confirmPassword } = formData;
+
+  const { isLoading, user, error } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const changePassword = (e) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      alert("The passwords do not match!");
-      return;
-    }
-    console.log("Password changed with the following data:", formData);
   };
 
   const [uCase, setUCase] = useState(false);
@@ -65,6 +73,54 @@ export const ChangePassword = () => {
     }
   }, [newPassword]);
 
+  const updatePassword = async (e) => {
+    e.preventDefault();
+
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      return toast.error("Please fill in all fields!");
+    }
+
+    if (newPassword !== confirmPassword) {
+      return toast.error("Passwords do not match!");
+    }
+
+    if (newPassword.length <= 7) {
+      return toast.error("Password must be at least 8 characters long.");
+    }
+    if (!newPassword.match(/[A-Z]/)) {
+      return toast.error(
+        "Password must contain at least one uppercase letter."
+      );
+    }
+    if (!newPassword.match(/[0-9]/)) {
+      return toast.error("Password must contain at least one number.");
+    }
+    if (!newPassword.match(/[!@#$%^&*]/)) {
+      return toast.error(
+        "Password must contain at least one special character."
+      );
+    }
+
+    const userData = {
+      oldPassword,
+      newPassword,
+    };
+
+    try {
+      await dispatch(changePassword(userData));
+
+      if (error) {
+        throw new Error(error);
+      }
+
+      await dispatch(logout());
+      await dispatch(RESET(userData));
+      navigate("/auth");
+    } catch {
+      toast.error(error || "An error occurred.");
+    }
+  };
+
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
@@ -75,11 +131,11 @@ export const ChangePassword = () => {
               <h2>ChangePassword</h2>
             </div>
             <div className="card-body">
-              <form>
+              <form onSubmit={updatePassword}>
                 <p>
                   <PasswordInput
                     className="form-style"
-                    id="password"
+                    id="oldPassword"
                     autoComplete="off"
                     placeholder="Old Password"
                     name="oldPassword"
@@ -91,7 +147,7 @@ export const ChangePassword = () => {
                 <p>
                   <PasswordInput
                     className="form-style"
-                    id="password"
+                    id="newPassword"
                     autoComplete="off"
                     placeholder="New Password"
                     name="newPassword"
@@ -103,7 +159,7 @@ export const ChangePassword = () => {
                 <p>
                   <PasswordInput
                     className="form-style"
-                    id="password"
+                    id="confirmPassword"
                     autoComplete="off"
                     placeholder="Repeat Password"
                     name="confirmPassword"
@@ -130,9 +186,15 @@ export const ChangePassword = () => {
                     At least 1 special character
                   </div>
                 </div>
-                <div className="text-center mt-3">
-                  <button className="btn">Change Password</button>
-                </div>
+                {isLoading ? (
+                  <Spinner />
+                ) : (
+                  <div className="text-center mt-3">
+                    <button type="submit" className="btn">
+                      Change Password
+                    </button>
+                  </div>
+                )}
               </form>
             </div>
           </div>

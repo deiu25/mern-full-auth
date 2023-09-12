@@ -315,7 +315,7 @@ const sendAutomatedEmail = asyncHandler(async (req, res) => {
   }
 
   const sent_from = process.env.EMAIL_USER;
-  const name = user.name;
+  const name = user.lastname;
   const link = `${process.env.FRONTEND_URL}${url}`;
 
   try {
@@ -376,7 +376,7 @@ const sendVerificationEmail = asyncHandler(async (req, res) => {
   const sent_from = process.env.EMAIL_USER;
   const reply_to = "noreply@SyntaxSeeker.com";
   const template = "verifyEmail";
-  const name = user.name;
+  const name = user.lastname;
   const link = verificationUrl;
 
   try {
@@ -461,12 +461,12 @@ const forgotPassword = asyncHandler(async (req, res) => {
   const resetUrl = `${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
 
   // Send Email
-  const subject = "Password Reset Request - AUTH:Z";
+  const subject = "Password Reset Request - SyntaxSeeker";
   const send_to = user.email;
   const sent_from = process.env.EMAIL_USER;
   const reply_to = "noreply@zino.com";
   const template = "forgotPassword";
-  const name = user.name;
+  const name = user.lastname;
   const link = resetUrl;
 
   try {
@@ -517,7 +517,7 @@ const resetPassword = asyncHandler(async (req, res) => {
 
 // Change Password
 const changePassword = asyncHandler(async (req, res) => {
-  const { oldPassword, password } = req.body;
+  const { oldPassword, newPassword } = req.body;
   const user = await User.findById(req.user._id);
 
   if (!user) {
@@ -525,7 +525,7 @@ const changePassword = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  if (!oldPassword || !password) {
+  if (!oldPassword || !newPassword) {
     res.status(400);
     throw new Error("Please enter old and new password");
   }
@@ -535,7 +535,7 @@ const changePassword = asyncHandler(async (req, res) => {
 
   // Save new password
   if (user && passwordIsCorrect) {
-    user.password = password;
+    user.password = newPassword;
     await user.save();
 
     res
@@ -577,7 +577,7 @@ const sendLoginCode = asyncHandler(async (req, res) => {
   const sent_from = process.env.EMAIL_USER;
   const reply_to = "noreply@syntaxseeker.com";
   const template = "loginCode";
-  const name = user.name;
+  const name = user.lastname;
   const link = decryptedLoginCode;
 
   try {
@@ -644,11 +644,11 @@ const loginWithCode = asyncHandler(async (req, res) => {
       secure: true,
     });
 
-    const { _id, name, email, phone, bio, photo, role, isVerified } = user;
+    const { _id, lastname, email, phone, bio, photo, role, isVerified } = user;
 
     res.status(200).json({
       _id,
-      name,
+      lastname,
       email,
       phone,
       bio,

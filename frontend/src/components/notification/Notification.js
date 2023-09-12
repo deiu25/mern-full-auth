@@ -9,7 +9,7 @@ export const Notification = () => {
 
     const sendVerEmail = async () => {
       await dispatch(sendVerificationEmail());
-      await dispatch(RESET);
+      await dispatch(RESET());
     };
 
   return (
