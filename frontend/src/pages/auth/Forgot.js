@@ -1,23 +1,38 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { validateEmail } from "../../redux/features/auth/authService";
+import { useDispatch, useSelector } from "react-redux";
+import { RESET, forgotPassword } from "../../redux/features/auth/authSlice";
+import { Loader } from "../../components/loader/Loader";
 
 export const Forgot = () => {
   const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "email") setEmail(value);
-  };
+  const { isLoading } = useSelector((state) => state.auth);
 
-  const resetPassword = (e) => {
+  const forgot = async (e) => {
     e.preventDefault();
-    // Call to backend or API to initiate password reset
-    console.log(`Password reset link sent to: ${email}`);
+    
+    if (!email) {
+      return toast.error("Email is required");
+    }
+
+    if (!validateEmail(email)) {
+      return toast.error("Invalid Email");
+    }
+
+    const userData = { email };
+
+    await dispatch(forgotPassword(userData));
+    await dispatch(RESET());
   };
 
   return (
     <div className="section full-bg">
       <div className="container">
+        {isLoading && <Loader />}
         <div className="row full-height justify-content-center">
           <div className="col-12 text-center align-self-center py-5">
             <div className="section pb-5 pt-5 pt-sm-2 text-center">
@@ -48,7 +63,7 @@ export const Forgot = () => {
                         <p className="text-light --text-center --fw-bold">
                           Enter your email to receive a password reset link.
                         </p>
-                        <form onSubmit={resetPassword}>
+                        <form onSubmit={forgot}>
                           <div className="form-group">
                             <input
                               type="email"
@@ -59,7 +74,7 @@ export const Forgot = () => {
                               id="email"
                               autoComplete="off"
                               required
-                              onChange={handleInputChange}
+                              onChange={(e) => setEmail(e.target.value)}
                             />
                             <i className="input-icon uil uil-at"></i>
                           </div>
