@@ -11,13 +11,15 @@ import { Notification } from "../../components/notification/Notification";
 const cloud_name = process.env.REACT_APP_CLOUD_NAME;
 const upload_preset = process.env.REACT_APP_UPLOAD_PRESET;
 
-const shortenText = (text, maxLength) => {
-  if (text.length > maxLength) {
-    const shortened = text.substr(0, maxLength) + "...";
-    return shortened;
+export const shortenText = (text, maxLength) => {
+  if (typeof text !== 'string' || text.length <= maxLength) {
+    return text;
   }
-  return text;
+
+  const shortened = text.substr(0, maxLength) + "...";
+  return shortened;
 };
+
 
 export const Profile = () => {
   useRedirectLoggedOutUser("/auth");
