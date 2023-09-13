@@ -90,9 +90,9 @@ export const Reset = () => {
       return toast.error("Passwords do not match!");
     }
 
-    const userData = { password, confirmPassword };
+    const userData = { password };
 
-    await dispatch(resetPassword(userData, resetToken));
+    await dispatch(resetPassword({userData, resetToken}));
     navigate("/auth");
   };
 
