@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../redux/features/auth/authService";
-import {login, RESET } from "../../redux/features/auth/authSlice";
+import {login, RESET, sendLoginCode } from "../../redux/features/auth/authSlice";
 
 
 const initialState = {
@@ -26,7 +26,7 @@ export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, isLoggedIn, isSuccess } = useSelector(
+  const { isLoading, isLoggedIn, isSuccess, message, isError, twoFactor } = useSelector(
     (state) => state.auth
   );
 
@@ -51,8 +51,14 @@ export const Login = () => {
     if (isSuccess && isLoggedIn) {
       navigate("/profile");
     }
+
+    if (isError && twoFactor) {
+      dispatch(sendLoginCode(email))
+      navigate('/loginWithCode/${email}')
+    }
+
     dispatch(RESET());
-  }, [isSuccess, isLoggedIn, navigate]);
+  }, [isSuccess, isLoggedIn, isError, twoFactor, navigate, dispatch, email]);
 
   return (
     <div className="card-front">
