@@ -5,14 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../redux/features/auth/authService";
-import {login, RESET, sendLoginCode } from "../../redux/features/auth/authSlice";
-
+import {login, loginWithGoogle, RESET, sendLoginCode } from "../../redux/features/auth/authSlice";
+import { GoogleLogin } from "@react-oauth/google";
 
 const initialState = {
   email: "",
   password: "",
 };
-
 
 export const Login = () => {
   const [formData, setFormData] = useState(initialState);
@@ -60,6 +59,12 @@ export const Login = () => {
     dispatch(RESET());
   }, [isSuccess, isLoggedIn, isError, twoFactor, navigate, dispatch, email]);
 
+  const googleLogin = async (credentialResponse) => {
+    console.log(credentialResponse);
+    await dispatch(loginWithGoogle({userToken: credentialResponse.credential }))
+  };
+
+
   return (
     <div className="card-front">
       {isLoading && <Loader />}
@@ -83,10 +88,13 @@ export const Login = () => {
           </svg>
           <h4 className="mb-4 pb-3 text-light">Log In</h4>
           <div className="--flex-center">
-            <button className="btn btn-primary">
-              <i className="fab fa-google mr-2"></i>
-              Sign in with Google
-            </button>
+          <GoogleLogin
+              onSuccess={googleLogin}
+              onError={() => {
+                console.log("Login Failed");
+                toast.error("Login Failed");
+              }}
+            />
           </div>
           <br />
           <p className="text-light --text-center --fw-bold">or</p>
@@ -121,7 +129,7 @@ export const Login = () => {
               Login
             </button>
           </form>
-          <p className="mb-0 mt-4 text-center">
+          <p className="mb-0 mt-5 text-center">
             <Link to="/forgot">Forgot your password?</Link>
           </p>
           <p className="mb-0 mt-4 text-center">
