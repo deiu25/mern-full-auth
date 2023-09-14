@@ -6,7 +6,7 @@ const {
   authorOnly,
 } = require("../middleware/authMiddleware");
 const {
-  registerUser, loginUser, logoutUser, getUser, updateUser, deleteUser, getUsers, loginStatus, upgradeUser, sendAutomatedEmail, sendVerificationEmail, verifyUser, forgotPassword, resetPassword, changePassword, sendLoginCode, loginWithCode
+  registerUser, loginUser, logoutUser, getUser, updateUser, deleteUser, getUsers, loginStatus, upgradeUser, sendAutomatedEmail, sendVerificationEmail, verifyUser, forgotPassword, resetPassword, changePassword, sendLoginCode, loginWithCode, loginWithGoogle
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);
@@ -29,5 +29,7 @@ router.patch("/changePassword", protect, changePassword);
 
 router.post("/sendLoginCode/:email", sendLoginCode);
 router.post("/loginWithCode/:email", loginWithCode);
+
+router.post("/google/callback", loginWithGoogle);
 
 module.exports = router;
