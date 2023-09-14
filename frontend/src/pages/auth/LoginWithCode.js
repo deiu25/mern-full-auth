@@ -8,7 +8,7 @@ import { Loader } from "../../components/loader/Loader";
 
 export const LoginWithCode = () => {
     const [loginCode, setLoginCode] = useState("");
-    const { email } = useSelector(state => state.auth); 
+    const { email } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ export const LoginWithCode = () => {
             loginCode,
         };
 
-        await dispatch(loginWithCode(code, email));
+        await dispatch(loginWithCode({ code, email }));
       };
     
       useEffect(() => {

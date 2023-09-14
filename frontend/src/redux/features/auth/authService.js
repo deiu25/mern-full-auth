@@ -91,6 +91,7 @@ const getUsers = async () => {
 
   return response.data;
 };
+
 // Delete User
 const deleteUser = async (id) => {
   const response = await axios.delete(API_URL + id);
@@ -111,12 +112,14 @@ const sendLoginCode = async (email) => {
 
   return response.data.message;
 };
+
 // Login With Code
 const loginWithCode = async (code, email) => {
   const response = await axios.post(API_URL + `loginWithCode/${email}`, code);
 
   return response.data;
 };
+
 // Login With Googlr
 const loginWithGoogle = async (userToken) => {
   const response = await axios.post(API_URL + "google/callback", userToken);

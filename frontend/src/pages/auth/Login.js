@@ -54,7 +54,7 @@ export const Login = () => {
 
     if (isError && twoFactor) {
       dispatch(sendLoginCode(email))
-      navigate('/loginWithCode/${email}')
+      navigate(`/loginWithCode/${email}`);
     }
 
     dispatch(RESET());
@@ -107,7 +107,7 @@ export const Login = () => {
             </div>
             <PasswordInput
               className="form-style"
-              id="password"
+              id="loginPassword"
               autoComplete="off"
               placeholder="Your Password"
               name="password"

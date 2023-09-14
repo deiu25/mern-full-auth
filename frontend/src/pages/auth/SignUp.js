@@ -168,7 +168,7 @@ export const SignUp = () => {
             </div>
             <PasswordInput
               className="form-style"
-              id="password"
+              id="registerPassword"
               autoComplete="off"
               placeholder="Password"
               name="password"
@@ -182,7 +182,7 @@ export const SignUp = () => {
             />
             <PasswordInput
               className="form-style"
-              id="password"
+              id="confirmPassword"
               autoComplete="off"
               placeholder="Repeat Password"
               name="confirmPassword"
