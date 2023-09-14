@@ -6,6 +6,8 @@ export const PasswordInput = ({
   name,
   onChange,
   OnPaste,
+  id, 
+  ...rest
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -21,10 +23,11 @@ export const PasswordInput = ({
         required
         className="form-style"
         placeholder={placeholder}
-        id="password"
+        id={id}
         autoComplete="off"
         onChange={onChange}
         onPaste={OnPaste}
+        {...rest} 
       />
       <i className="input-icon uil uil-lock-alt"></i>
       <i

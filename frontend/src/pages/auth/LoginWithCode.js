@@ -12,7 +12,7 @@ export const LoginWithCode = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { isLoading, isLoggedIn, isSuccess, message, isError, twoFactor } = useSelector(
+    const { isLoading, isLoggedIn, isSuccess } = useSelector(
         (state) => state.auth
     );
 

@@ -25,7 +25,7 @@ export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, isLoggedIn, isSuccess, message, isError, twoFactor } = useSelector(
+  const { isLoading, isLoggedIn, isSuccess, isError, twoFactor } = useSelector(
     (state) => state.auth
   );
 
@@ -43,6 +43,7 @@ export const Login = () => {
       email,
       password,
     };
+
     await dispatch(login(userData));
   };
 
@@ -63,7 +64,6 @@ export const Login = () => {
     console.log(credentialResponse);
     await dispatch(loginWithGoogle({userToken: credentialResponse.credential }))
   };
-
 
   return (
     <div className="card-front">

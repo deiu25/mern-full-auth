@@ -6,10 +6,20 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRoute");
 const errorHandler = require("./middleware/errorMiddleware");
+const helmet = require("helmet");
 
 const app = express();
 
-//Middleware
+// Middleware pentru configurarea politicii COOP
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginOpenerPolicy: "same-origin",
+    crossOriginEmbedderPolicy: false,
+  })
+);
+
+// Alte middleware-uri
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -27,7 +37,7 @@ app.get("/", (req, res) => {
   res.send("Home Page");
 });
 
-//Error Handler Middleware
+// Error Handler Middleware
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
@@ -40,6 +50,3 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
-
-//npm run backend
-//npm start

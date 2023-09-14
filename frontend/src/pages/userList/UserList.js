@@ -24,7 +24,7 @@ export const UserList = () => {
 
   const [search, setSearch] = useState("");
 
-  const { users, isLoading, isLoggedIn, isSuccess, message } = useSelector(
+  const { users, isLoading } = useSelector(
     (state) => state.auth
   );
 

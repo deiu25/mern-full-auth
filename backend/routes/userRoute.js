@@ -6,7 +6,8 @@ const {
   authorOnly,
 } = require("../middleware/authMiddleware");
 const {
-  registerUser, loginUser, logoutUser, getUser, updateUser, deleteUser, getUsers, loginStatus, upgradeUser, sendAutomatedEmail, sendVerificationEmail, verifyUser, forgotPassword, resetPassword, changePassword, sendLoginCode, loginWithCode, loginWithGoogle
+  registerUser, loginUser, logoutUser, getUser, updateUser, deleteUser, getUsers, loginStatus, upgradeUser, sendAutomatedEmail, sendVerificationEmail,
+  verifyUser, forgotPassword, resetPassword, changePassword, sendLoginCode, loginWithCode, loginWithGoogle
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);

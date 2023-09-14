@@ -2,7 +2,6 @@ import "./ChangePassword.scss";
 import React, { useEffect, useState } from "react";
 import { PageMenu } from "../../components/pageMenu/PageMenu";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";
-import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutUser";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

@@ -18,7 +18,7 @@ export const Reset = () => {
   const { resetToken } = useParams();
   console.log(resetToken);
 
-  const { isLoading, isLoggedIn, isSuccess, message } = useSelector((state) => state.auth);
+  const { isLoading, isSuccess, message } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

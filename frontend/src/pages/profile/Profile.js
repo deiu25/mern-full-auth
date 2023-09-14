@@ -1,5 +1,4 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import profileImg from "../../assets/avatarr.png";
 import { PageMenu } from "../../components/pageMenu/PageMenu";
 import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutUser";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +25,7 @@ export const Profile = () => {
 
   const dispatch = useDispatch();
 
-  const { isLoading, isLoggedIn, isSuccess, message, user } = useSelector(
+  const { isLoading, user } = useSelector(
     (state) => state.auth
   );
 
@@ -100,8 +99,8 @@ export const Profile = () => {
 
   useLayoutEffect(() => {
     if (user) {
-      setProfile({
-        ...profile,
+      setProfile(prevProfile => ({
+        ...prevProfile,
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
@@ -110,7 +109,7 @@ export const Profile = () => {
         photo: user.photo,
         role: user.role,
         isVerified: user.isVerified,
-      });
+      }));
     }
   }, [user]);
 
