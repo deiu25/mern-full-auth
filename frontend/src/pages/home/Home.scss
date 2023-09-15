@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #eee;
+    background-color: #1f2029;
     min-height: 80vh;
   }
   
@@ -11,6 +11,7 @@
     & > * {
       color: #333;
       margin-bottom: 2rem;
+      color: #fff;
     }
     & > h2 span {
       display: block;

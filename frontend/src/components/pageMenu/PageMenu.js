@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { AdminAuthorLink } from "../protect/hiddenLink";
+import "./PageMenu.scss";
 
 export const PageMenu = () => {
   return (
-    <div>
-      <nav className="--btn-google --p --mb">
-        <ul className="home-links">
+      <nav className="navi">
+        <ul>
           <li>
             <NavLink to="/profile">
               Profile
@@ -26,6 +26,5 @@ export const PageMenu = () => {
           </AdminAuthorLink>
         </ul>
       </nav>
-    </div>
   );
 };

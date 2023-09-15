@@ -1,4 +1,3 @@
-import "./ChangePassword.scss";
 import React, { useEffect, useState } from "react";
 import { PageMenu } from "../../components/pageMenu/PageMenu";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";

@@ -5,7 +5,7 @@ export default function Footer() {
     <>
     <hr className='--color-dark' />
     <div className='--flex-center --py2 --bg-grey'>
-        <p>All Rights Reserved. &copy; 2023</p>
+        <p>&copy; 2023 SyntaxSeeker. All rights reserved. Built by SyntaxSeeker.</p>
     </div>
     </>
   )

@@ -3,7 +3,7 @@ nav {
     justify-content: space-between;
     padding: 15px 5%;
     align-items: center;
-    background-color: #18283B;
+    background-color: #1f2029;
  }
 
  .logo {
@@ -35,7 +35,7 @@ nav {
    ul li a:hover,
    ul li a.active {
       background-color: #fff;
-      color: #18283B;
+      color: #1f2029;
    }
    
    #icon svg {
@@ -62,7 +62,7 @@ nav {
          left: 0;
          width: 100%;
          height: 100vh;
-         background-color: #18283B;
+         background-color: #1f2029;
          display: flex;
          flex-direction: column;
          align-items: center;
