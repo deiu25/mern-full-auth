@@ -52,7 +52,7 @@ export const ChangeRole = ({_id, email}) => {
           <option value="admin">Admin</option>
           <option value="suspended">Suspended</option>
         </select>
-        <button className="--btn --btn-primary">
+        <button className="--btn-primary --btn-check">
           <FaCheck size={15} />
         </button>
       </form>

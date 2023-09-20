@@ -61,14 +61,14 @@ export const Profile = () => {
     try {
       // Create form data
       const formData = new FormData();
-      formData.append('firstname', profile.firstname);
-      formData.append('lastname', profile.lastname);
-      formData.append('phone', profile.phone);
-      formData.append('bio', profile.bio);
+      formData.append("firstname", profile.firstname);
+      formData.append("lastname", profile.lastname);
+      formData.append("phone", profile.phone);
+      formData.append("bio", profile.bio);
       if (profileImage !== null) {
-        formData.append('photo', profileImage);
+        formData.append("photo", profileImage);
       }
-  
+
       // Send form data to server
       dispatch(updateUser(formData));
     } catch (error) {
@@ -106,11 +106,21 @@ export const Profile = () => {
               </div>
               <div className="card-body">
                 <div className="text-center">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="hiddenFileInput"
+                    style={{ display: "none" }}
+                    onChange={handleImageChange}
+                  />
                   <img
                     src={imagePreview === null ? user?.photo : imagePreview}
                     alt="profileImg"
                     className="rounded-circle mb-3"
                     style={{ width: "150px", height: "150px" }}
+                    onClick={() =>
+                      document.getElementById("hiddenFileInput").click()
+                    }
                   />
                   <h3>Role: {profile.role}</h3>
                 </div>
@@ -121,7 +131,7 @@ export const Profile = () => {
                       type="file"
                       accept="photo/*"
                       name="photo"
-                      className="form-control-file "
+                      className="form-control-file"
                       onChange={handleImageChange}
                     />
                   </div>
@@ -153,7 +163,7 @@ export const Profile = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="form-group form-group-flex">
+                  <div className="email-input form-group form-group-flex" style={{ position: "relative" }}>
                     <label htmlFor="email">Email</label>
                     <span className="input-icon mt-4">
                       <i className="uil uil-at"></i>
@@ -163,10 +173,13 @@ export const Profile = () => {
                       disabled
                       id="email"
                       name="email"
-                      className="form-control form-style"
+                      className="form-style"
                       value={profile?.email}
                       onChange={handleInputChange}
                     />
+                    <span className="hover-message">
+                    You cannot change your email address.
+                    </span>
                   </div>
                   <div className="form-group form-group-flex">
                     <label htmlFor="phone">Phone</label>

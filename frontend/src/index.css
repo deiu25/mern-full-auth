@@ -345,6 +345,31 @@ p {
   background: var(--color-grey);
 }
 
+.--btn-check {
+  border: none;
+  color: white; 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 8px;
+  margin: 0 0 0 4px;
+  cursor: pointer;
+  padding: 9px 10px;
+  border-radius: 5px; 
+}
+
+.hover-message {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 35px;
+  color: red; 
+}
+
+.email-input:hover .hover-message {
+  display: inline;
+}
+
 .--form-control {
   font-size: 1.6rem;
   font-weight: 300;
