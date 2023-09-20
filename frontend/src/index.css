@@ -475,8 +475,8 @@ a:hover {
   cursor: pointer;
   border-radius: 3px;
   font-weight: normal;
-  color: #333;
-  border: 1px solid #333;
+  color: #fff;
+  border: 1px solid #007bff;
   margin: 2px;
 }
 

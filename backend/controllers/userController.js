@@ -10,7 +10,7 @@ const Token = require("../models/tokenModel");
 const crypto = require("crypto");
 const Cryptr = require("cryptr");
 const { OAuth2Client } = require("google-auth-library");
-
+const cloudinary = require('cloudinary').v2;
 
 const cryptr = new Cryptr(process.env.CRYPTR_KEY);
 
@@ -667,7 +667,6 @@ const loginWithCode = asyncHandler(async (req, res) => {
 // Login With Google
 const loginWithGoogle = asyncHandler(async (req, res) => {
   const { userToken } = req.body;
-  console.log(userToken);
 
   const ticket = await client.verifyIdToken({
     idToken: userToken,
@@ -675,7 +674,9 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
   });
 
   const payload = ticket.getPayload();
-  const { firstname, lastname, email, picture, sub } = payload;
+  const { given_name, family_name, email, picture, sub } = payload;
+  const firstname = given_name;
+  const lastname = family_name || "N/A";
   const password = Date.now() + sub;
 
   // Get UserAgent
