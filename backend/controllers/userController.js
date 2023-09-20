@@ -1,3 +1,4 @@
+require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
@@ -10,9 +11,10 @@ const crypto = require("crypto");
 const Cryptr = require("cryptr");
 const { OAuth2Client } = require("google-auth-library");
 
+
 const cryptr = new Cryptr(process.env.CRYPTR_KEY);
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
@@ -665,10 +667,11 @@ const loginWithCode = asyncHandler(async (req, res) => {
 // Login With Google
 const loginWithGoogle = asyncHandler(async (req, res) => {
   const { userToken } = req.body;
+  console.log(userToken);
 
   const ticket = await client.verifyIdToken({
     idToken: userToken,
-    audience: process.env.GOOGLE_CLIENT_ID,
+    audience: process.env.CLIENT_ID,
   });
 
   const payload = ticket.getPayload();
@@ -753,7 +756,7 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
     });
   }
 });
-
+  
 module.exports = {
     registerUser,
     loginUser,

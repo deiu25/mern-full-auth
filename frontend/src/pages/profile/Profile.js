@@ -150,7 +150,7 @@ export const Profile = () => {
                   <div className="form-group form-group-flex">
                     <label htmlFor="firstname">First Name</label>
                     <span className="input-icon mt-4">
-                      <i class="uil uil-user"></i>
+                      <i className="uil uil-user"></i>
                     </span>
                     <input
                       type="text"
@@ -164,7 +164,7 @@ export const Profile = () => {
                   <div className="form-group form-group-flex">
                     <label htmlFor="lastname">Last Name</label>
                     <span className="input-icon mt-4">
-                      <i class="uil uil-user"></i>
+                      <i className="uil uil-user"></i>
                     </span>
                     <input
                       type="text"
@@ -178,7 +178,7 @@ export const Profile = () => {
                   <div className="form-group form-group-flex">
                     <label htmlFor="email">Email</label>
                     <span className="input-icon mt-4">
-                      <i class="uil uil-at"></i>
+                      <i className="uil uil-at"></i>
                     </span>
                     <input
                       type="email"
@@ -193,7 +193,7 @@ export const Profile = () => {
                   <div className="form-group form-group-flex">
                     <label htmlFor="phone">Phone</label>
                     <span className="input-icon mt-4">
-                      <i class="uil uil-phone"></i>
+                      <i className="uil uil-phone"></i>
                     </span>
                     <input
                       type="text"
@@ -207,7 +207,7 @@ export const Profile = () => {
                   <div className="form-group form-group-flex">
                     <label htmlFor="bio">Bio</label>
                     <span className="input-icon">
-                      <i class="uil uil-comment"></i>
+                      <i className="uil uil-comment"></i>
                     </span>
                     <textarea
                       id="bio"

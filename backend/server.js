@@ -6,26 +6,16 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRoute");
 const errorHandler = require("./middleware/errorMiddleware");
-const helmet = require("helmet");
 
 const app = express();
 
-// Middleware pentru configurarea politicii COOP
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-    crossOriginOpenerPolicy: "same-origin",
-    crossOriginEmbedderPolicy: false,
-  })
-);
-
-// Alte middleware-uri
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://mernd-full-auth.vercel.app"],
+    origin: ["http://localhost:3000"],
     credentials: true,
   })
 );

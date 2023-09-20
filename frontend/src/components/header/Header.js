@@ -47,11 +47,7 @@ export const Header = () => {
         </label>
         <ul>
           <ShowOnLogout>
-          <li>
-            <button className="btn">
-              <Link className="btn btn-primary" to="/auth">Auth</Link>
-            </button>
-          </li>
+              <Link className="btn" to='/auth'>Auth</Link>
           </ShowOnLogout>
           <ShowOnLogin>
           <li>

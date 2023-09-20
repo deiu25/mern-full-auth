@@ -16,11 +16,8 @@ export const Home = () => {
         {/* <p>Discover more.</p> */}
         <div className='hero-buttons --flex-start'>
         <ShowOnLogout>
-          <button className='btn'>
-            <Link className="btn btn-primary" to='/auth'>Auth</Link>
-          </button>
+            <Link className="btn" to='/auth'>Auth</Link>
         </ShowOnLogout>
-          {/* <button className='--btn --btn-primary'>Learn More</button> */}
         </div>
         </div>
         <div className='hero-image'>

@@ -122,10 +122,16 @@ const loginWithCode = async (code, email) => {
 
 // Login With Google
 const loginWithGoogle = async (userToken) => {
-  const response = await axios.post(API_URL + "google/callback", userToken);
-
-  return response.data;
+  try {
+    const response = await axios.post(API_URL + "google/callback", userToken);
+    console.log(response.data); 
+    return response.data;
+  } catch (error) {
+    console.error("Eroare la loginWithGoogle:", error); 
+    throw error; 
+  }
 };
+
 
 const authService = {
   register,
