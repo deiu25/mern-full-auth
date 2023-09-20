@@ -7,14 +7,15 @@ const {
 } = require("../middleware/authMiddleware");
 const {
   registerUser, loginUser, logoutUser, getUser, updateUser, deleteUser, getUsers, loginStatus, upgradeUser, sendAutomatedEmail, sendVerificationEmail,
-  verifyUser, forgotPassword, resetPassword, changePassword, sendLoginCode, loginWithCode, loginWithGoogle
+  verifyUser, forgotPassword, resetPassword, changePassword, sendLoginCode, loginWithCode, loginWithGoogle,
 } = require("../controllers/userController");
+const upload = require("../utils/cloudinaryConfig");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/logout", logoutUser);
 router.get("/getUser", protect, getUser);
-router.patch("/updateUser", protect, updateUser);
+router.patch("/updateUser", protect, upload.single('photo'), updateUser);
 
 router.delete("/:id", protect, adminOnly, deleteUser);
 router.get("/getUsers", protect, authorOnly, getUsers);

@@ -11,9 +11,6 @@ import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 import { Notification } from "../../components/notification/Notification";
 
-const cloud_name = process.env.REACT_APP_CLOUD_NAME;
-const upload_preset = process.env.REACT_APP_UPLOAD_PRESET;
-
 export const shortenText = (text, maxLength) => {
   if (typeof text !== "string" || text.length <= maxLength) {
     return text;
@@ -61,38 +58,19 @@ export const Profile = () => {
 
   const saveProfile = async (e) => {
     e.preventDefault();
-    let imageURL;
     try {
-      if (
-        profileImage !== null &&
-        (profileImage.type === "image/jpeg" ||
-          profileImage.type === "image/png" ||
-          profileImage.type === "image/jpg")
-      ) {
-        const image = new FormData();
-        image.append("file", profileImage);
-        image.append("upload_preset", upload_preset);
-        image.append("cloud_name", cloud_name);
-
-        //Save image to cloudinary
-        const response = await fetch(
-          "https://api.cloudinary.com/v1_1/dvstsvpyz/image/upload",
-          { method: "POST", body: image }
-        );
-        const imgData = await response.json();
-        imageURL = imgData.url.toString();
+      // Create form data
+      const formData = new FormData();
+      formData.append('firstname', profile.firstname);
+      formData.append('lastname', profile.lastname);
+      formData.append('phone', profile.phone);
+      formData.append('bio', profile.bio);
+      if (profileImage !== null) {
+        formData.append('photo', profileImage);
       }
-
-      //Save profile to MongoB
-      const userData = {
-        firstname: profile.firstname,
-        lastname: profile.lastname,
-        phone: profile.phone,
-        bio: profile.bio,
-        photo: profileImage ? imageURL : profile.photo,
-      };
-
-      dispatch(updateUser(userData));
+  
+      // Send form data to server
+      dispatch(updateUser(formData));
     } catch (error) {
       toast.error(error.message);
     }

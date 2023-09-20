@@ -41,8 +41,12 @@ const getUser = async () => {
 };
 
 // Update profile
-const updateUser = async (userData) => {
-  const response = await axios.patch(API_URL + "updateUser", userData);
+const updateUser = async (formData) => {
+  const response = await axios.patch(API_URL + "updateUser", formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
   return response.data;
 };
 
