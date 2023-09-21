@@ -1,42 +1,32 @@
 require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const userRoute = require("./routes/userRoute");
-const errorHandler = require("./middleware/errorMiddleware");
 
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    credentials: true,
-  })
-);
-
-// Routes
-app.use("/api/users", userRoute);
-
-app.get("/", (req, res) => {
-  res.send("Home Page");
-});
-
-// Error Handler Middleware
-app.use(errorHandler);
-
+const connectDatabase = require('./config/database');
+const app = require('./app');
 const PORT = process.env.PORT || 5000;
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
+//Handle Uncaught exceptions
+process.on('uncaughtException', err => {
+  console.log(`ERROR: ${err.stack}`);
+  console.log('Shutting down the server due to Uncaught Exception');
+  process.exit(1)
+})
+
+//Connecting to database
+connectDatabase().then(() => {
+  const server = app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT} in ${process.env.NODE_ENV} mode.`);
+  });
+
+  //Handle unhandled promise rejections
+  process.on('unhandledRejection', err => {
+    console.log(`ERROR: ${err.stack}`);
+    console.log('Shutting down the server due to Unhandled Promise rejection');
+    server.close(() => {
+        process.exit(1)
+    })
   })
-  .catch((err) => console.log(err));
+
+}).catch((error) => {
+  console.log(`Could not connect to database: ${error}`);
+});
+
