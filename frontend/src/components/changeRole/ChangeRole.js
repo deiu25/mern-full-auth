@@ -26,7 +26,7 @@ export const ChangeRole = ({_id, email}) => {
     };
 
     const emailData = {
-      subject: "Account Role Changed - AUTH:Z",
+      subject: "Account Role Changed - SyntaxSeeker",
       send_to: email,
       reply_to: "noreply@zino",
       template: "changeRole",

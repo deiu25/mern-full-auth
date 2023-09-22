@@ -89,6 +89,48 @@ h6 span{
   transform: translateX(44px) rotate(-270deg);
 }
 
+[type="checkbox1"]:checked,
+[type="checkbox1"]:not(:checked){
+  position: absolute;
+  left: -9999px;
+}
+.checkbox1:checked + label,
+.checkbox1:not(:checked) + label{
+  position: relative;
+  display: block;
+  text-align: center;
+  width: 60px;
+  height: 16px;
+  border-radius: 8px;
+  padding: 0;
+  margin: 10px auto;
+  cursor: pointer;
+  background-color:#007bff;
+}
+.checkbox1:checked + label:before,
+.checkbox1:not(:checked) + label:before{
+  position: absolute;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #007bff;
+  font-family: 'unicons';
+  content: '\eb4f';
+  z-index: 20;
+  top: -10px;
+  left: -10px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 24px;
+  transition: all 0.5s ease;
+}
+.checkbox1:checked + label:before {
+  transform: translateX(44px) rotate(-270deg);
+}
+
+
 
 .card-3d-wrap {
   position: relative;

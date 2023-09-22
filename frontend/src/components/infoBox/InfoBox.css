@@ -12,20 +12,20 @@
   color: #fff;
   transform: translateY(0);
   transition: all 0.3s;
+}
 
-  &:hover {
-    cursor: pointer;
+.info-box:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+}
 
-    transform: translateY(-5px);
-  }
+.info-box .info-icon {
+  padding: 0 2rem;
+  color: #fff;
+}
 
-  .info-icon {
-    padding: 0 2rem;
-    color: #fff;
-  }
-  .info-text > * {
-    color: #fff;
-  }
+.info-box .info-text > * {
+  color: #fff;
 }
 
 @media screen and (max-width: 600px) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./UserList.scss";
+import "./UserList.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { UserStats } from "../../components/userStats/UserStats";
@@ -23,10 +23,9 @@ export const UserList = () => {
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState("");
+  const [error, setError] = useState(null);
 
-  const { users, isLoading } = useSelector(
-    (state) => state.auth
-  );
+  const { users, isLoading } = useSelector((state) => state.auth);
 
   const filteredUsers = useSelector(selectUsers);
 
@@ -81,6 +80,7 @@ export const UserList = () => {
       <UserStats />
       <div className="user-list">
         {isLoading && <Spinner />}
+        {error && <p>Error: {error}</p>}
         <div className="table">
           <div className="--flex-between">
             <span>
@@ -100,7 +100,8 @@ export const UserList = () => {
               <thead>
                 <tr>
                   <th>s/n</th>
-                  <th>Name</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
                   <th>Email</th>
                   <th>Role</th>
                   <th>Change Role</th>
@@ -115,7 +116,7 @@ export const UserList = () => {
                       <td>{index + 1}</td>
                       <td>{shortenText(firstname, 8)}</td>
                       <td>{shortenText(lastname, 8)}</td>
-                      <td>{shortenText(email, 8)}</td>
+                      <td>{shortenText(email, 15)}</td>
                       <td>{role}</td>
                       <td>
                         <ChangeRole _id={_id} email={email} />
@@ -126,6 +127,7 @@ export const UserList = () => {
                             size={20}
                             color="red"
                             onClick={() => confirmDelete(_id)}
+                            cursor={"pointer"}
                           />
                         </span>
                       </td>

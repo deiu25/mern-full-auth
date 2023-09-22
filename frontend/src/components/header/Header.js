@@ -57,7 +57,7 @@ export const Header = () => {
           </li>
           
           <li>
-            <button onClick={logoutUser} className="--btn --btn-secondary">Logout</button>
+            <button onClick={logoutUser} className="btn --btn-secondary">Logout</button>
           </li>
           </ShowOnLogin>
         </ul>

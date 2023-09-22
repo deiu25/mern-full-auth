@@ -100,7 +100,9 @@ export const Profile = () => {
         <div className="row justify-content-center">
           <div className="col-12 col-md-8">
             <div className="card">
-              <PageMenu />
+              <div className="head-profile">
+                <PageMenu />
+              </div>
               <div className="card-header text-center">
                 <h2>Profile</h2>
               </div>
@@ -163,7 +165,10 @@ export const Profile = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="email-input form-group form-group-flex" style={{ position: "relative" }}>
+                  <div
+                    className="email-input form-group form-group-flex"
+                    style={{ position: "relative" }}
+                  >
                     <label htmlFor="email">Email</label>
                     <span className="input-icon mt-4">
                       <i className="uil uil-at"></i>
@@ -178,7 +183,7 @@ export const Profile = () => {
                       onChange={handleInputChange}
                     />
                     <span className="hover-message">
-                    You cannot change your email address.
+                      You cannot change your email address.
                     </span>
                   </div>
                   <div className="form-group form-group-flex">

@@ -7,10 +7,16 @@ nav {
  }
 
  .logo {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: #fff;
     text-decoration: none;
+    margin-right: 4%;
+    cursor: pointer;
+ }
+
+ .btn {
+   padding: 10px 20px;
  }
 
  ul {
@@ -94,4 +100,3 @@ nav {
          z-index: 1;
       }
    }
-
