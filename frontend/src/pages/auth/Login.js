@@ -61,7 +61,6 @@ export const Login = () => {
   }, [isSuccess, isLoggedIn, isError, twoFactor, navigate, dispatch, email]);
 
   const googleLogin = async (credentialResponse) => {
-    console.log(credentialResponse);
     await dispatch(loginWithGoogle({userToken: credentialResponse.credential }))
   };
 
@@ -91,7 +90,6 @@ export const Login = () => {
           <GoogleLogin
               onSuccess={googleLogin}
               onError={() => {
-                console.log("Login Failed");
                 toast.error("Login Failed");
               }}
             />

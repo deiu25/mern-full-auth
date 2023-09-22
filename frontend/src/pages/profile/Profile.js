@@ -239,7 +239,7 @@ export const Profile = () => {
 
 export const UserName = () => {
   const user = useSelector(selectUser);
-  const lastName = user?.lastname || "...";
-  const shortenedLastName = shortenText(lastName, 9);
+  const firstName = user?.firstname || "...";
+  const shortenedLastName = shortenText(firstName, 9);
   return <span>{shortenedLastName}</span>;
 };

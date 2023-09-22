@@ -6,19 +6,6 @@ nav {
   background-color: #1f2029;
 }
 
-.logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #fff;
-  text-decoration: none;
-  margin-right: 4%;
-  cursor: pointer;
-}
-
-.btn {
- padding: 10px 20px;
-}
-
 ul {
   list-style: none;
 }
@@ -76,10 +63,6 @@ ul {
        transition: .5s ease-in-out;
        opacity: 0;
        z-index: -1;
-    }
-
-    ul li {
-       display: block;
     }
 
     ul li a {

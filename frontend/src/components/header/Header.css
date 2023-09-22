@@ -61,6 +61,26 @@ nav {
       display: none;
    }
 
+   /* bubbles */
+  
+   .bubbles {
+      position: absolute;
+      background: #bbb;
+      border-radius: 66%;
+      animation: float 2.5s ease-in infinite;
+      opacity: 0.5;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      100% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+    }
+
    @media screen and (max-width: 768px) {
       ul {
          position: fixed;

@@ -10,7 +10,7 @@ const Token = require("../models/tokenModel");
 const crypto = require("crypto");
 const Cryptr = require("cryptr");
 const { OAuth2Client } = require("google-auth-library");
-
+const cloudinary = require("cloudinary").v2;
 const cryptr = new Cryptr(process.env.CRYPTR_KEY);
 
 const client = new OAuth2Client(process.env.CLIENT_ID);
@@ -211,18 +211,28 @@ const getUser = asyncHandler(async (req, res) => {
 // Update User
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
-
+  const oldPhotoUrl = user.photo;
+  console.log(oldPhotoUrl);
   if (user) {
-    const { firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
+    const { firstname, lastname, email, phone, bio, photo } = user;
 
     user.email = email;
     user.firstname = req.body.firstname || firstname;
     user.lastname = req.body.lastname || lastname;
     user.phone = req.body.phone || phone;
     user.bio = req.body.bio || bio;
-    user.photo = req.file ? req.file.path : photo; // If new photo was uploaded, save new url
+    user.photo = req.file ? req.file.path : oldPhotoUrl;
 
     const updatedUser = await user.save();
+
+    // Delete old photo
+  if (oldPhotoUrl !== updatedUser.photo) {
+    try {
+      await cloudinary.uploader.destroy(oldPhotoUrl);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
     res.status(200).json({
       _id: updatedUser._id,
@@ -494,7 +504,6 @@ const resetPassword = asyncHandler(async (req, res) => {
   const { resetToken } = req.params;
   const { password } = req.body;
   console.log(resetToken);
-  console.log(password);
 
   const hashedToken = hashToken(resetToken);
 
