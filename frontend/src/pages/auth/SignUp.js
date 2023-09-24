@@ -4,7 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../redux/features/auth/authService";
 import { useDispatch, useSelector } from "react-redux";
-import { register, RESET, sendVerificationEmail } from "../../redux/features/auth/authSlice";
+import {
+  register,
+  RESET,
+  sendVerificationEmail,
+} from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
 
 const initialState = {
@@ -22,7 +26,9 @@ export const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, isLoggedIn, isSuccess } = useSelector((state) => state.auth);
+  const { isLoading, isLoggedIn, isSuccess } = useSelector(
+    (state) => state.auth
+  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,11 +55,11 @@ export const SignUp = () => {
       lastname,
       email,
       password,
-  };
-  //console.log(userData);
+    };
+    //console.log(userData);
 
-  await dispatch(register(userData));
-  await dispatch(sendVerificationEmail());
+    await dispatch(register(userData));
+    await dispatch(sendVerificationEmail());
   };
 
   useEffect(() => {
@@ -100,7 +106,6 @@ export const SignUp = () => {
       setSChar(false);
     }
   }, [password]);
-
 
   return (
     <div className="card-back">
@@ -175,10 +180,11 @@ export const SignUp = () => {
               required
               value={password}
               onChange={handleInputChange}
-              OnPaste={(e) => {e.preventDefault();
-              toast.error("You can't paste here");
-            return false;
-            }}
+              OnPaste={(e) => {
+                e.preventDefault();
+                toast.error("You can't paste here");
+                return false;
+              }}
             />
             <PasswordInput
               className="form-style"
@@ -189,33 +195,34 @@ export const SignUp = () => {
               required
               value={confirmPassword}
               onChange={handleInputChange}
-              OnPaste={(e) => {e.preventDefault();
+              OnPaste={(e) => {
+                e.preventDefault();
                 toast.error("You can't paste here");
-              return false;
+                return false;
               }}
             />
-          
-          <div className="password-info">
-            <div className="password-info-item">
-              {switchIcon(passLength)}
-              At least 6 characters
+
+            <div className="password-info">
+              <div className="password-info-item">
+                {switchIcon(passLength)}
+                At least 6 characters
+              </div>
+              <div className="password-info-item">
+                {switchIcon(uCase)}
+                At least 1 uppercase letter
+              </div>
+              <div className="password-info-item">
+                {switchIcon(num)}
+                At least 1 number
+              </div>
+              <div className="password-info-item">
+                {switchIcon(sChar)}
+                At least 1 special character
+              </div>
             </div>
-            <div className="password-info-item">
-              {switchIcon(uCase)}
-              At least 1 uppercase letter
-            </div>
-            <div className="password-info-item">
-              {switchIcon(num)}
-              At least 1 number
-            </div>
-            <div className="password-info-item">
-              {switchIcon(sChar)}
-              At least 1 special character
-            </div>
-          </div>
-          <button type="submit" className="btn mt-4">
-            Submit
-          </button>
+            <button type="submit" className="btn mt-4">
+              Submit
+            </button>
           </form>
           <p className="mb-0 mt-4 text-center">
             <Link to="/forgot">Forgot your password?</Link>

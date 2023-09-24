@@ -16,6 +16,12 @@ const storage = new CloudinaryStorage({
   params: {
     folder: 'avatars',
     public_id: (req, file) => file.originalname,
+    url: async (req, file) => {
+      return new Promise((resolve, reject) => {
+        const uniqueFilename = new Date().toISOString();
+        resolve(uniqueFilename);
+      });
+    },
   },
 });
 

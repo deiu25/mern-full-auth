@@ -17,43 +17,143 @@ const client = new OAuth2Client(process.env.CLIENT_ID);
 
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
-    const { firstname, lastname, email, password } = req.body;
   
-    // Validation
-    if (!firstname || !lastname || !email || !password) {
-      res.status(400);
-      throw new Error("Please fill in all the required fields.");
-    }
-  
-    if (password.length < 6) {
-      res.status(400);
-      throw new Error("Password must be up to 6 characters.");
-    }
-  
-    // Check if user exists
-    const userExists = await User.findOne({ email });
-  
-    if (userExists) {
-      res.status(400);
-      throw new Error("Email already in use.");
-    }
-  
-    // Get UserAgent
-    const ua = parser(req.headers["user-agent"]);
-    const userAgent = [ua.ua];
-  
-    //   Create new user
-    const user = await User.create({
+  const { firstname, lastname, email, password } = req.body;
+
+  // Validation
+  if (!firstname || !lastname || !email || !password) {
+    res.status(400);
+    throw new Error("Please fill in all the required fields.");
+  }
+
+  if (password.length < 6) {
+    res.status(400);
+    throw new Error("Password must be up to 6 characters.");
+  }
+
+  // Check if user exists
+  const userExists = await User.findOne({ email });
+
+  if (userExists) {
+    res.status(400);
+    throw new Error("Email already in use.");
+  }
+
+  // Get UserAgent
+  const ua = parser(req.headers["user-agent"]);
+  const userAgent = [ua.ua];
+
+  //   Create new user
+  const user = await User.create({
+    firstname,
+    lastname,
+    email,
+    password,
+    userAgent,
+  });
+
+  // Generate Token
+  const token = generateToken(user._id);
+
+  // Send HTTP-only cookie
+  res.cookie("token", token, {
+    path: "/",
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 86400), // 1 day
+    sameSite: "none",
+    secure: true,
+  });
+
+  if (user) {
+    const {
+      _id,
       firstname,
       lastname,
       email,
-      password,
-      userAgent,
+      phone,
+      bio,
+      photo,
+      role,
+      isVerified,
+    } = user;
+
+    res.status(201).json({
+      _id,
+      firstname,
+      lastname,
+      email,
+      phone,
+      bio,
+      photo,
+      role,
+      isVerified,
+      token,
     });
-  
-    // Generate Token
-    const token = generateToken(user._id);
-  
+  } else {
+    res.status(400);
+    throw new Error("Invalid user data");
+  }
+});
+
+// Login User
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  //   Validation
+  if (!email || !password) {
+    res.status(400);
+    throw new Error("Please add email and password");
+  }
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found, please signup");
+  }
+
+  const passwordIsCorrect = await bcrypt.compare(password, user.password);
+
+  if (!passwordIsCorrect) {
+    res.status(400);
+    throw new Error("Invalid email or password");
+  }
+
+  // Trgger 2FA for unknow UserAgent
+  const ua = parser(req.headers["user-agent"]);
+  const thisUserAgent = ua.ua;
+  const allowedAgent = user.userAgent.includes(thisUserAgent);
+
+  if (!allowedAgent) {
+    // Generate 6 digit code
+    const loginCode = Math.floor(100000 + Math.random() * 900000);
+    console.log(loginCode);
+
+    // Encrypt login code before saving to DB
+    const encryptedLoginCode = cryptr.encrypt(loginCode.toString());
+
+    // Delete Token if it exists in DB
+    let userToken = await Token.findOne({ userId: user._id });
+    if (userToken) {
+      await userToken.deleteOne();
+    }
+
+    // Save Tokrn to DB
+    await new Token({
+      userId: user._id,
+      lToken: encryptedLoginCode,
+      createdAt: Date.now(),
+      expiresAt: Date.now() + 60 * (60 * 1000), // 60mins
+    }).save();
+
+    res.status(400);
+    throw new Error("New browser or device detected");
+  }
+
+  // Generate Token
+  const token = generateToken(user._id);
+
+  if (user && passwordIsCorrect) {
     // Send HTTP-only cookie
     res.cookie("token", token, {
       path: "/",
@@ -62,177 +162,112 @@ const registerUser = asyncHandler(async (req, res) => {
       sameSite: "none",
       secure: true,
     });
-  
-    if (user) {
-      const { _id, firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
-  
-      res.status(201).json({
-        _id,
-        firstname,
-        lastname,
-        email,
-        phone,
-        bio,
-        photo,
-        role,
-        isVerified,
-        token,
-      });
-    } else {
-      res.status(400);
-      throw new Error("Invalid user data");
-    }
-  });
-  
-  // Login User
-  const loginUser = asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
-  
-    //   Validation
-    if (!email || !password) {
-      res.status(400);
-      throw new Error("Please add email and password");
-    }
-  
-    const user = await User.findOne({ email });
-  
-    if (!user) {
-      res.status(404);
-      throw new Error("User not found, please signup");
-    }
-  
-    const passwordIsCorrect = await bcrypt.compare(password, user.password);
-  
-    if (!passwordIsCorrect) {
-      res.status(400);
-      throw new Error("Invalid email or password");
-    }
-  
-    // Trgger 2FA for unknow UserAgent
-    const ua = parser(req.headers["user-agent"]);
-    const thisUserAgent = ua.ua;
-    const allowedAgent = user.userAgent.includes(thisUserAgent);
-  
-    if (!allowedAgent) {
-      // Generate 6 digit code
-      const loginCode = Math.floor(100000 + Math.random() * 900000);
-      console.log(loginCode);
-  
-      // Encrypt login code before saving to DB
-      const encryptedLoginCode = cryptr.encrypt(loginCode.toString());
-  
-      // Delete Token if it exists in DB
-      let userToken = await Token.findOne({ userId: user._id });
-      if (userToken) {
-        await userToken.deleteOne();
-      }
-  
-      // Save Tokrn to DB
-      await new Token({
-        userId: user._id,
-        lToken: encryptedLoginCode,
-        createdAt: Date.now(),
-        expiresAt: Date.now() + 60 * (60 * 1000), // 60mins
-      }).save();
-  
-      res.status(400);
-      throw new Error("New browser or device detected");
-    }
-  
-    // Generate Token
-    const token = generateToken(user._id);
-  
-    if (user && passwordIsCorrect) {
-      // Send HTTP-only cookie
-      res.cookie("token", token, {
-        path: "/",
-        httpOnly: true,
-        expires: new Date(Date.now() + 1000 * 86400), // 1 day
-        sameSite: "none",
-        secure: true,
-      });
-  
-      const { _id, firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
-  
-      res.status(200).json({
-        _id,
-        firstname,
-        lastname,
-        email,
-        phone,
-        bio,
-        photo,
-        role,
-        isVerified,
-        token,
-      });
-    } else {
-      res.status(500);
-      throw new Error("Something went wrong, please try again");
-    }
-  });
-  
-  // Logout User
-const logoutUser = asyncHandler(async (req, res) => {
-    res.cookie("token", "", {
-      path: "/",
-      httpOnly: true,
-      expires: new Date(0),
-      sameSite: "none",
-      secure: true,
+
+    const {
+      _id,
+      firstname,
+      lastname,
+      email,
+      phone,
+      bio,
+      photo,
+      role,
+      isVerified,
+    } = user;
+
+    res.status(200).json({
+      _id,
+      firstname,
+      lastname,
+      email,
+      phone,
+      bio,
+      photo,
+      role,
+      isVerified,
+      token,
     });
-    return res.status(200).json({ message: "Logout successful" });
+  } else {
+    res.status(500);
+    throw new Error("Something went wrong, please try again");
+  }
+});
+
+// Logout User
+const logoutUser = asyncHandler(async (req, res) => {
+  res.cookie("token", "", {
+    path: "/",
+    httpOnly: true,
+    expires: new Date(0),
+    sameSite: "none",
+    secure: true,
   });
+  return res.status(200).json({ message: "Logout successful" });
+});
 
 // Get User
 const getUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
-  
-    if (user) {
-      const { _id, firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
-  
-      res.status(200).json({
-        _id,
-        firstname,
-        lastname,
-        email,
-        phone,
-        bio,
-        photo,
-        role,
-        isVerified,
-      });
-    } else {
-      res.status(404);
-      throw new Error("User not found");
-    }
-  });
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    const {
+      _id,
+      firstname,
+      lastname,
+      email,
+      phone,
+      bio,
+      photo,
+      role,
+      isVerified,
+    } = user;
+
+    res.status(200).json({
+      _id,
+      firstname,
+      lastname,
+      email,
+      phone,
+      bio,
+      photo,
+      role,
+      isVerified,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
 
 // Update User
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   const oldPhotoUrl = user.photo;
-  console.log(oldPhotoUrl);
+  // Trim .jpg from end
+  const cleanOldUrl = oldPhotoUrl.replace(/\.jpg$/, "");
+  console.log(cleanOldUrl);
   if (user) {
-    const { firstname, lastname, email, phone, bio, photo } = user;
+    const { firstname, lastname, email, phone, bio } = user;
 
     user.email = email;
     user.firstname = req.body.firstname || firstname;
     user.lastname = req.body.lastname || lastname;
     user.phone = req.body.phone || phone;
     user.bio = req.body.bio || bio;
-    user.photo = req.file ? req.file.path : oldPhotoUrl;
+    user.photo = req.file ? req.file.path : cleanOldUrl;
 
     const updatedUser = await user.save();
 
     // Delete old photo
-  if (oldPhotoUrl !== updatedUser.photo) {
-    try {
-      await cloudinary.uploader.destroy(oldPhotoUrl);
-    } catch (error) {
-      console.log(error);
+    if (cleanOldUrl !== updatedUser.photo) {
+      try {
+        // Delete old photo
+        await cloudinary.uploader.destroy(cleanOldUrl);
+        console.log("Old photo deleted");
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
 
     res.status(200).json({
       _id: updatedUser._id,
@@ -719,7 +754,17 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
         secure: true,
       });
 
-      const { _id, firstname, lastname, email, phone, bio, photo, role, isVerified } = newUser;
+      const {
+        _id,
+        firstname,
+        lastname,
+        email,
+        phone,
+        bio,
+        photo,
+        role,
+        isVerified,
+      } = newUser;
 
       res.status(201).json({
         _id,
@@ -749,7 +794,17 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
       secure: true,
     });
 
-    const { _id, firstname, lastname, email, phone, bio, photo, role, isVerified } = user;
+    const {
+      _id,
+      firstname,
+      lastname,
+      email,
+      phone,
+      bio,
+      photo,
+      role,
+      isVerified,
+    } = user;
 
     res.status(201).json({
       _id,
@@ -765,24 +820,24 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
     });
   }
 });
-  
+
 module.exports = {
-    registerUser,
-    loginUser,
-    logoutUser,
-    getUser,
-    updateUser,
-    deleteUser,
-    getUsers,
-    loginStatus,
-    upgradeUser,
-    sendAutomatedEmail,
-    sendVerificationEmail,
-    verifyUser,
-    forgotPassword,
-    resetPassword,
-    changePassword,
-    sendLoginCode,
-    loginWithCode,
-    loginWithGoogle,
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUser,
+  updateUser,
+  deleteUser,
+  getUsers,
+  loginStatus,
+  upgradeUser,
+  sendAutomatedEmail,
+  sendVerificationEmail,
+  verifyUser,
+  forgotPassword,
+  resetPassword,
+  changePassword,
+  sendLoginCode,
+  loginWithCode,
+  loginWithGoogle,
 };

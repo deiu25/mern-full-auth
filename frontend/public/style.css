@@ -355,3 +355,11 @@ h6 span{
   transform: translateY(-50%);
   cursor: pointer; 
 }
+
+@media (max-width: 450px) {
+  .name-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem;
+  }
+}
