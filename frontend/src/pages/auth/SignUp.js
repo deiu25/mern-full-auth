@@ -10,6 +10,7 @@ import {
   sendVerificationEmail,
 } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
+import './AuthStyle.css'
 
 const initialState = {
   firstname: "",
@@ -111,7 +112,7 @@ export const SignUp = () => {
     <div className="card-back">
       <div className="center-wrap">
         {isLoading && <Loader />}
-        <div className="section text-center">
+        <div className="section centered-text">
           <svg
             fill="none"
             stroke="currentColor"
@@ -158,21 +159,22 @@ export const SignUp = () => {
                 <i className="input-icon uil uil-user"></i>
               </div>
             </div>
-            <div className="form-group mt-2">
+            <div className="form-group">
               <input
                 type="email"
                 name="email"
                 value={email}
                 onChange={handleInputChange}
-                className="form-style"
+                className="form-style margin-top"
                 placeholder="Email"
                 id="logemail"
                 autoComplete="off"
               />
               <i className="input-icon uil uil-at"></i>
             </div>
+            <div className="form-group">
             <PasswordInput
-              className="form-style"
+              className="form-style margin-top"
               id="registerPassword"
               autoComplete="off"
               placeholder="Password"
@@ -186,8 +188,10 @@ export const SignUp = () => {
                 return false;
               }}
             />
+            </div>
+            <div className="form-group">
             <PasswordInput
-              className="form-style"
+              className="form-style margin-top"
               id="confirmPassword"
               autoComplete="off"
               placeholder="Repeat Password"
@@ -201,7 +205,7 @@ export const SignUp = () => {
                 return false;
               }}
             />
-
+            </div>
             <div className="password-info">
               <div className="password-info-item">
                 {switchIcon(passLength)}

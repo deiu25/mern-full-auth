@@ -19,6 +19,12 @@ nav {
    padding: 10px 20px;
  }
 
+ .btn-secondary {
+   color: #fff;
+   border: 1px solid #fff;
+   background: transparent;
+ }
+
  ul {
     list-style: none;
  }

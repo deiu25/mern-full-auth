@@ -11,6 +11,7 @@ import {
 } from "../../redux/features/auth/authSlice";
 import { Spinner } from "../../components/loader/Loader";
 import { sendAutomatedEmail } from "../../redux/features/email/emailSlice";
+import "./ChangePassword.css";
 
 const initialState = {
   oldPassword: "",
@@ -130,15 +131,15 @@ export const ChangePassword = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-12 col-md-8">
-          <div className="card">
+    <div className="change-pass-container margin-top">
+      <div className="centered-row">
+      <div className="full-width medium-width">
+            <div className="custom-card">
             <PageMenu />
-            <div className="card-header text-center">
-              <h2>ChangePassword</h2>
+            <div className="custom-card-header centered-text">
+              <h2>Change Password</h2>
             </div>
-            <div className="card-body">
+            <div className="custom-card-body">
               <form onSubmit={updatePassword}>
                 <p>
                   <PasswordInput
@@ -176,7 +177,7 @@ export const ChangePassword = () => {
                     onChange={handleInputChange}
                   />
                 </p>
-                <div className="password-info text-center">
+                <div className="centered-text">
                   <div className="password-info-item">
                     {switchIcon(passLength)}
                     At least 8 characters
@@ -197,7 +198,7 @@ export const ChangePassword = () => {
                 {isLoading ? (
                   <Spinner />
                 ) : (
-                  <div className="text-center mt-3">
+                  <div className="centered-text margin-top-2">
                     <button type="submit" className="btn">
                       Change Password
                     </button>

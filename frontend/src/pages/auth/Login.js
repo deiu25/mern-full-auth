@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { validateEmail } from "../../redux/features/auth/authService";
 import {login, loginWithGoogle, RESET, sendLoginCode } from "../../redux/features/auth/authSlice";
 import { GoogleLogin } from "@react-oauth/google";
+import './AuthStyle.css'
 
 const initialState = {
   email: "",
@@ -112,7 +113,7 @@ export const Login = () => {
               <i className="input-icon uil uil-at"></i>
             </div>
             <PasswordInput
-              className="form-style"
+              className="form-style margin-top"
               id="loginPassword"
               autoComplete="off"
               placeholder="Your Password"

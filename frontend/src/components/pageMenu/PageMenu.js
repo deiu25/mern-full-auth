@@ -5,7 +5,7 @@ import "./PageMenu.css";
 
 export const PageMenu = () => {
   return (
-      <nav className="navi flex-center">
+      <nav className="navi">
         <input type="checkbox" id="checkbox1" />
         <label htmlFor="checkbox1" id="icon1">
           <svg
@@ -23,7 +23,7 @@ export const PageMenu = () => {
             ></path>
           </svg>
         </label>
-        <ul className="profile-navi">
+        <ul>
           <li>
             <NavLink to="/profile">
               Profile

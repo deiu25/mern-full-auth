@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RESET, verifyUser } from "../../redux/features/auth/authSlice";
 import { useParams } from "react-router-dom";
 import { Loader } from "../../components/loader/Loader";
+import './AuthStyle.css'
 
 export const Verify = () => {
 

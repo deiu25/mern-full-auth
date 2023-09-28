@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RESET, loginWithCode, sendLoginCode } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
-
+import './AuthStyle.css'
 
 export const LoginWithCode = () => {
     const [loginCode, setLoginCode] = useState("");

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Login } from './Login'
 import { SignUp } from './SignUp'
+import './AuthStyle.css'
 
 export const Auth = () => {
   return (

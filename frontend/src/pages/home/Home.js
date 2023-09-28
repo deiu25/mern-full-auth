@@ -1,5 +1,5 @@
 import React from 'react'
-import './Home.scss'
+import './Home.css'
 import loginImg from '../../assets/login.svg'
 import { Link } from 'react-router-dom'
 import { ShowOnLogout } from '../../components/protect/hiddenLink'
@@ -14,7 +14,7 @@ export const Home = () => {
         <p>Develop the necessary skills to implement user registration, login, password reset, social login, user permissions, email notifications, and additional features.</p>
         <p>Take the first step!</p>
         {/* <p>Discover more.</p> */}
-        <div className='hero-buttons --flex-start'>
+        <div className='hero-buttons flex-start'>
         <ShowOnLogout>
             <Link className="btn" to='/auth'>Auth</Link>
         </ShowOnLogout>
