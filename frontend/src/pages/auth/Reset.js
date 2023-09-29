@@ -105,16 +105,16 @@ export const Reset = () => {
 
   return (
     <div className="section full-bg">
-      <div className="container">
-        {isLoading && <Loader />}
-        <div className="row full-height justify-content-center">
-          <div className="col-12 text-center align-self-center py-5">
-            <div className="section pb-5 pt-5 pt-sm-2 text-center">
-              <div className="card-3d-wrap mx-auto">
-                <div className="card-3d-wrapper">
-                  <div className="card-front">
-                    <div className="center-wrap">
-                      <div className="section text-center">
+    <div className="custom-container">
+      {isLoading && <Loader />}
+      <div className="custom-row full-height">
+        <div className="custom-div">
+          <div className="custom-section">
+            <div className="card-3d-wrap mx-auto">
+              <div className="card-3d-wrapper">
+                <div className="card-front">
+                  <div className="center-wrap">
+                    <div className="section">
                         <svg
                           fill="none"
                           stroke="currentColor"
@@ -131,8 +131,8 @@ export const Reset = () => {
                             d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                           ></path>
                         </svg>
-                        <h4 className="mb-4 pb-3 text-light">Reset Password</h4>
-                        <p className="text-light --text-center --fw-bold">
+                        <h4 className="authTitle">Reset Password</h4>
+                        <p className="forgotParagraph">
                           Enter your new password below.
                         </p>
                         <form onSubmit={reset}>
@@ -162,7 +162,7 @@ export const Reset = () => {
                           </div>
                           <button
                             type="submit"
-                            className="btn mt-4 --btn --btn-primary btn-block"
+                            className="btn fullWidth margin-top-3rem"
                           >
                             Reset Password
                           </button>
@@ -185,10 +185,10 @@ export const Reset = () => {
                             At least 1 special character
                           </div>
                         </div>
-                        <p className="mb-0 mt-4 text-center">
+                        <p className="custom-paragraph">
                           <Link to="/auth">Back to Login</Link>
                         </p>
-                        <p className="mb-0 mt-4 text-center">
+                        <p className="custom-paragraph">
                           <Link to="/">Back to Home</Link>
                         </p>
                       </div>

@@ -13,7 +13,6 @@ export const Home = () => {
         <p>Learn to create a comprehensive authentication system using React, Node, Express, and MongoDB.</p>
         <p>Develop the necessary skills to implement user registration, login, password reset, social login, user permissions, email notifications, and additional features.</p>
         <p>Take the first step!</p>
-        {/* <p>Discover more.</p> */}
         <div className='hero-buttons flex-start'>
         <ShowOnLogout>
             <Link className="btn" to='/auth'>Auth</Link>

@@ -22,10 +22,10 @@ export const Verify = () => {
   return (
     <section>
       {isLoading && <Loader />}
-      <div className="--center-all">
+      <div className="hero-text">
         <h2>Account Verification</h2>
         <p>To verify your account, click the button below...</p>
-        <button className="--btn --btn-primary" onClick={verifyAccount}>Verify Account</button>
+        <button className="btn fullWidth margin-top-3rem" onClick={verifyAccount}>Verify Account</button>
       </div>
     </section>
   );

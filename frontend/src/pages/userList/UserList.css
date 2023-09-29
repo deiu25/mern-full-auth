@@ -16,12 +16,6 @@ a {
 a:hover {
 	text-decoration: none;
 }
-.link {
-  color: #c4c3ca;
-}
-.link:hover {
-  color: #a7b0ff;
-}
 p {
   font-weight: 500;
   font-size: 14px;
@@ -84,6 +78,11 @@ h6 span{
 
 .user-list {
   color: #333;
+}
+
+.allUsers{
+  margin-top: 12px;
+  color: #fff;
 }
 
 .user-list .table {
@@ -149,7 +148,7 @@ h6 span{
 }
 
 .user-list .table table tbody tr:hover {
-  background-color: rgba(121, 136, 149, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .sort {
@@ -173,3 +172,32 @@ h6 span{
   border-bottom: 2px solid #777;
   outline: none;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+  font-weight: 300;
+}
+
+.pagination .activePage {
+  color: #fff;
+  background-color: #2553d3; 
+  border-radius: 5px; 
+}
+
+
+
+@media (max-width: 768px) {
+  .user-list .table table {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .user-list .table table {
+    font-size: 1rem;
+  }
+}
+
+

@@ -7,6 +7,7 @@ import {
   EMAIL_RESET,
   sendAutomatedEmail,
 } from "../../redux/features/email/emailSlice";
+import "./ChangeRole.css";
 
 export const ChangeRole = ({_id, email}) => {
   const [userRole, setUserRole] = useState("");
@@ -42,7 +43,7 @@ export const ChangeRole = ({_id, email}) => {
   return (
     <div className="sort">
       <form
-        className="--flex-start"
+        className=""
         onSubmit={(e) => changeRole(e, _id, userRole)}
       >
         <select value={userRole} onChange={(e) => setUserRole(e.target.value)}>
@@ -52,7 +53,7 @@ export const ChangeRole = ({_id, email}) => {
           <option value="admin">Admin</option>
           <option value="suspended">Suspended</option>
         </select>
-        <button className="--btn-primary --btn-check">
+        <button className="btn-primary btn-check">
           <FaCheck size={15} />
         </button>
       </form>

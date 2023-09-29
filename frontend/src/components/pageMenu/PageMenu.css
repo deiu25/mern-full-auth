@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
@@ -36,6 +34,14 @@ h6 span{
   font-weight: 700;
 }
 
+.hover-effect {
+   transition: transform 0.3s ease-in-out;
+ }
+ 
+ .hover-effect:hover {
+   transform: scale(1.05);
+ }
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -44,31 +50,31 @@ nav {
   background-color: #1f2029;
 }
 
-ul {
-  list-style: none;
+.navList .navLink {
+   display: inline-block;
+   margin-left: 20px;
 }
 
- ul li {
-    display: inline-block;
-    margin-left: 20px;
- }
+.navList .navLink a {
+   font-size: 1.5rem;
+   color: #fff;
+   text-decoration: none;
+   transition: all 0.2s, transform 0.3s ease-in-out;
+   padding: 8px 30px;
+   border-radius: 5px;
+}
 
- ul li a {
-    font-size: 1.2rem;
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.2s;
-    padding: 8px 30px;
-    border-radius: 5px;
-    transition: all .3s ease;
- }
+.navList .navLink a:hover,
+.navList .navLink a.active {
+   background-color: #fff;
+   color: #1f2029;
+   border-bottom: 2px solid rgb(61, 99, 202);
+}
 
- ul li a:hover,
- ul li a.active {
-    background-color: #fff;
-    color: #1f2029;
- }
- 
+.hover-effect:hover {
+   transform: scale(1.05);
+}
+
  #icon1 svg {
     width: 28px;
     height: 28px;
@@ -91,43 +97,42 @@ ul {
 
  #checkbox1,
  #icon1 {
-    display: none;
+     display: none;
  }
-
+ 
+ 
  @media screen and (max-width: 768px) {
-    ul {
-       position: fixed;
-       top: 50px;
-       left: 0;
-       width: 100%;
-       height: 100vh;
-       background-color: #1f2029;
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-       justify-content: space-evenly;
-       transition: .5s ease-in-out;
-       opacity: 0;
-       z-index: -1;
-    }
-
-    ul li a {
-       font-size: 1.5rem;
-       color: #fff;
-       text-decoration: none;
-       transition: all 0.2s;
-       border-radius: 5px;
-       transition: all .3s ease;
-    }
-
-    #icon1 {
-       display: block;
-       z-index: 2;
-    }
-
-    #checkbox1:checked ~ ul {
-       opacity: 1;
-       z-index: 1;
-    }
-
+     .navList {
+         position: fixed;
+         top: 50px;
+         left: 0;
+         width: 100%;
+         height: 100vh;
+         background-color: #1f2029;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: space-evenly;
+         transition: .5s ease-in-out;
+         opacity: 0;
+         z-index: -1;
+     }
+ 
+     .navList .navLink a {
+         font-size: 1.5rem;
+         color: #fff;
+         text-decoration: none;
+         transition: all 0.2s, transform 0.3s ease-in-out;
+         border-radius: 5px;
+     }
+ 
+     #icon1 {
+         display: block;
+         z-index: 2;
+     }
+ 
+     #checkbox1:checked ~ .navList {
+         opacity: 1;
+         z-index: 1;
+     }
  }

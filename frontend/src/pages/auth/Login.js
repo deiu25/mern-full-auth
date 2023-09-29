@@ -86,8 +86,8 @@ export const Login = () => {
               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
             ></path>
           </svg>
-          <h4 className="mb-4 pb-3 text-light">Log In</h4>
-          <div className="--flex-center">
+          <h4 className="authTitle">Log In</h4>
+          <div className="flex-center">
           <GoogleLogin
               onSuccess={googleLogin}
               onError={() => {
@@ -96,7 +96,7 @@ export const Login = () => {
             />
           </div>
           <br />
-          <p className="text-light --text-center --fw-bold">or</p>
+          <p className="or">or</p>
           <form onSubmit={loginUser}>
             <div className="form-group">
               <input
@@ -123,15 +123,15 @@ export const Login = () => {
             />
             <button
               type="submit"
-              className="btn mt-4 --btn --btn-primary btn-block"
+              className="btn fullWidth margin-top-3rem"
             >
               Login
             </button>
           </form>
-          <p className="mb-0 mt-5 text-center">
+          <p className="custom-paragraph">
             <Link to="/forgot">Forgot your password?</Link>
           </p>
-          <p className="mb-0 mt-4 text-center">
+          <p className="custom-paragraph">
             <Link to="/">Back to Home</Link>
           </p>
         </div>

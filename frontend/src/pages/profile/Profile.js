@@ -102,9 +102,8 @@ export const Profile = () => {
           <div className="full-width medium-width">
             <div className="custom-card">
               <PageMenu />
-
               <div className="custom-card-header centered-text">
-                <h2>Profile</h2>
+                <h2 className="textColor">Profile</h2>
               </div>
               <div className="custom-card-body">
                 <div className="centered-text">
@@ -118,16 +117,16 @@ export const Profile = () => {
                   <img
                     src={imagePreview === null ? user?.photo : imagePreview}
                     alt="profileImg"
-                    className="circle margin-bottom"
+                    className="circle margin-bottom hover-effect"
                     onClick={() =>
                       document.getElementById("hiddenFileInput").click()
                     }
                   />
-                  <h3>Role: {profile.role}</h3>
+                  <h3 className="textColor">Role: {profile.role}</h3>
                 </div>
                 <form onSubmit={saveProfile}>
+                  <label>Change Photo</label>
                   <div className="custom-form-group">
-                    <label>Change Photo</label>
                     <input
                       type="file"
                       accept="photo/*"
@@ -168,7 +167,12 @@ export const Profile = () => {
                     className="email-input form-group form-group-flex"
                     style={{ position: "relative" }}
                   >
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">
+                      Email{" "}
+                      <span className="hover-message">
+                        You cannot change your email address.
+                      </span>
+                    </label>
                     <span className="input-icon-custom">
                       <i className="uil uil-at"></i>
                     </span>
@@ -181,9 +185,6 @@ export const Profile = () => {
                       value={profile?.email}
                       onChange={handleInputChange}
                     />
-                    <span className="hover-message">
-                      You cannot change your email address.
-                    </span>
                   </div>
                   <div className="form-group form-group-flex">
                     <label htmlFor="phone">Phone</label>
@@ -207,14 +208,13 @@ export const Profile = () => {
                     <textarea
                       id="bio"
                       name="bio"
-                      className="form-control form-style"
-                      rows="5"
+                      className="textarea"
                       value={profile?.bio}
                       onChange={handleInputChange}
                     ></textarea>
                   </div>
                   <div className="centered-text margin-top">
-                    <button className="btn">Update Profile</button>
+                    <button className="btn hover hover-effect">Update Profile</button>
                   </div>
                 </form>
               </div>

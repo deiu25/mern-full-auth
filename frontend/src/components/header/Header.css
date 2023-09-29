@@ -67,26 +67,6 @@ nav {
       display: none;
    }
 
-   /* bubbles */
-  
-   .bubbles {
-      position: absolute;
-      background: #bbb;
-      border-radius: 66%;
-      animation: float 2.5s ease-in infinite;
-      opacity: 0.5;
-    }
-    
-    @keyframes float {
-      0% {
-        transform: translateY(0px);
-      }
-      100% {
-        transform: translateY(-50px);
-        opacity: 0;
-      }
-    }
-
    @media screen and (max-width: 768px) {
       ul {
          position: fixed;
@@ -124,5 +104,20 @@ nav {
       #checkbox:checked ~ ul {
          opacity: 1;
          z-index: 1;
+      }
+   }
+
+   @media screen and (max-width: 601px) {
+      .logo h1{
+         font-size: 2.5rem;
+      }
+      nav {
+         margin-bottom: 3rem;
+      }
+   }
+
+   @media screen and (max-width: 400px) {
+      .logo h1{
+         font-size: 1.5rem;
       }
    }

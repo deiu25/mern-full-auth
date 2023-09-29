@@ -91,7 +91,7 @@ export const UserList = () => {
                 />
           </>
           <>
-            <h3>All Users</h3>
+            <h3 className="allUsers">All Users</h3>
           </>
           {!isLoading && users.length === 0 ? (
             <p>No user found...</p>

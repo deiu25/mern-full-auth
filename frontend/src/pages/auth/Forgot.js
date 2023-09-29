@@ -31,16 +31,16 @@ export const Forgot = () => {
 
   return (
     <div className="section full-bg">
-      <div className="container">
+      <div className="custom-container">
         {isLoading && <Loader />}
-        <div className="row full-height justify-content-center">
-          <div className="col-12 text-center align-self-center py-5">
-            <div className="section pb-5 pt-5 pt-sm-2 text-center">
+        <div className="custom-row full-height">
+          <div className="custom-div">
+            <div className="custom-section">
               <div className="card-3d-wrap mx-auto">
                 <div className="card-3d-wrapper">
                   <div className="card-front">
                     <div className="center-wrap">
-                      <div className="section text-center">
+                      <div className="section">
                         <svg
                           fill="none"
                           stroke="currentColor"
@@ -57,10 +57,10 @@ export const Forgot = () => {
                             d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
                           ></path>
                         </svg>
-                        <h4 className="mb-4 pb-3 text-light">
+                        <h4 className="forgotTitle">
                           Forgot Password
                         </h4>
-                        <p className="text-light --text-center --fw-bold">
+                        <p className="forgotParagraph">
                           Enter your email to receive a password reset link.
                         </p>
                         <form onSubmit={forgot}>
@@ -80,15 +80,15 @@ export const Forgot = () => {
                           </div>
                           <button
                             type="submit"
-                            className="btn mt-4 --btn --btn-primary btn-block"
+                            className="btn fullWidth margin-top-3rem"
                           >
                             Send Reset Link
                           </button>
                         </form>
-                        <p className="mb-0 mt-4 text-center">
+                        <p className="custom-paragraph">
                           <Link to="/auth">Back to Login</Link>
                         </p>
-                        <p className="mb-0 mt-4 text-center">
+                        <p className="custom-paragraph">
                           <Link to="/">Back to Home</Link>
                         </p>
                       </div>
