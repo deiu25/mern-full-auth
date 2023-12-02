@@ -1,10 +1,10 @@
 import React from 'react'
+import './Footer.css'
 
 export default function Footer() {
   return (
     <>
-    <hr/>
-    <div className='--flex-center --py2'>
+    <div className='footerText'>
         <p>&copy; 2023 SyntaxSeeker. All rights reserved. Built by SyntaxSeeker.</p>
     </div>
     </>

@@ -10,6 +10,7 @@ import {
   sendVerificationEmail,
 } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
+import './AuthStyle.css'
 
 const initialState = {
   firstname: "",
@@ -40,6 +41,12 @@ export const SignUp = () => {
     if (!firstname || !lastname || !email || !password || !confirmPassword) {
       return toast.error("Please fill in all fields");
     }
+    if (firstname.length < 3 || !/^[a-zA-Z0-9]+$/.test(firstname)) {
+      return toast.error("First name must be at least 3 characters long and contains only letters and numbers");
+    }
+    if (lastname.length < 3 || !/^[a-zA-Z0-9]+$/.test(lastname)) {
+      return toast.error("Last name must be at least 3 characters long and contains only letters and numbers");
+    }
     if (password.length < 6) {
       return toast.error("Password must be at least 6 characters");
     }
@@ -49,15 +56,14 @@ export const SignUp = () => {
     if (!validateEmail(email)) {
       return toast.error("Invalid email");
     }
-
+  
     const userData = {
       firstname,
       lastname,
       email,
       password,
     };
-    //console.log(userData);
-
+  
     await dispatch(register(userData));
     await dispatch(sendVerificationEmail());
   };
@@ -111,7 +117,7 @@ export const SignUp = () => {
     <div className="card-back">
       <div className="center-wrap">
         {isLoading && <Loader />}
-        <div className="section text-center">
+        <div className="section centered-text">
           <svg
             fill="none"
             stroke="currentColor"
@@ -128,7 +134,7 @@ export const SignUp = () => {
               d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
             ></path>
           </svg>
-          <h4 className="mb-4 pb-3 text-light">Sign Up</h4>
+          <h4 className="singUp">Sign Up</h4>
           <form className="form-group" onSubmit={registerUser}>
             <div className="name-group form-group-flex">
               <div className="form-group">
@@ -158,21 +164,22 @@ export const SignUp = () => {
                 <i className="input-icon uil uil-user"></i>
               </div>
             </div>
-            <div className="form-group mt-2">
+            <div className="form-group">
               <input
                 type="email"
                 name="email"
                 value={email}
                 onChange={handleInputChange}
-                className="form-style"
+                className="form-style margin-top"
                 placeholder="Email"
                 id="logemail"
                 autoComplete="off"
               />
               <i className="input-icon uil uil-at"></i>
             </div>
+            <div className="form-group">
             <PasswordInput
-              className="form-style"
+              className="form-style margin-top"
               id="registerPassword"
               autoComplete="off"
               placeholder="Password"
@@ -186,8 +193,10 @@ export const SignUp = () => {
                 return false;
               }}
             />
+            </div>
+            <div className="form-group">
             <PasswordInput
-              className="form-style"
+              className="form-style margin-top"
               id="confirmPassword"
               autoComplete="off"
               placeholder="Repeat Password"
@@ -201,7 +210,7 @@ export const SignUp = () => {
                 return false;
               }}
             />
-
+            </div>
             <div className="password-info">
               <div className="password-info-item">
                 {switchIcon(passLength)}
@@ -224,10 +233,10 @@ export const SignUp = () => {
               Submit
             </button>
           </form>
-          <p className="mb-0 mt-4 text-center">
+          <p className="custom-paragraph">
             <Link to="/forgot">Forgot your password?</Link>
           </p>
-          <p className="mb-0 mt-4 text-center">
+          <p className="custom-paragraph">
             <Link to="/">Back to Home</Link>
           </p>
         </div>

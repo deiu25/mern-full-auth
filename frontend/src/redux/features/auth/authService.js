@@ -128,6 +128,7 @@ const loginWithCode = async (code, email) => {
 const loginWithGoogle = async (userToken) => {
   try {
     const response = await axios.post(API_URL + "google/callback", userToken);
+    console.log(response.data); 
     return response.data;
   } catch (error) {
     console.error("Eroare la loginWithGoogle:", error); 

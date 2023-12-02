@@ -75,24 +75,24 @@ export const UserList = () => {
 
   // End Pagination
   return (
-    <div className="card mt-5">
+    <div className="custom-card margin-top-2">
+      <div className="custom-card-header centered-text">
       <PageMenu />
       <UserStats />
+      </div>
       <div className="user-list">
         {isLoading && <Spinner />}
         {error && <p>Error: {error}</p>}
         <div className="table">
-          <div className="--flex-between">
-            <span>
-              <h3>All Users</h3>
-              <span>
+          <>
                 <Search
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-              </span>
-            </span>
-          </div>
+          </>
+          <>
+            <h3 className="allUsers">All Users</h3>
+          </>
           {!isLoading && users.length === 0 ? (
             <p>No user found...</p>
           ) : (

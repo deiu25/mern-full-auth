@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RESET, verifyUser } from "../../redux/features/auth/authSlice";
 import { useParams } from "react-router-dom";
 import { Loader } from "../../components/loader/Loader";
+import './AuthStyle.css'
 
 export const Verify = () => {
 
@@ -21,10 +22,10 @@ export const Verify = () => {
   return (
     <section>
       {isLoading && <Loader />}
-      <div className="--center-all">
+      <div className="hero-text">
         <h2>Account Verification</h2>
         <p>To verify your account, click the button below...</p>
-        <button className="--btn --btn-primary" onClick={verifyAccount}>Verify Account</button>
+        <button className="btn fullWidth margin-top-3rem" onClick={verifyAccount}>Verify Account</button>
       </div>
     </section>
   );

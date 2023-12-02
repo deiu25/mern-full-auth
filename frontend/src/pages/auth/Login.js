@@ -5,8 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../redux/features/auth/authService";
-import {login, loginWithGoogle, RESET, sendLoginCode } from "../../redux/features/auth/authSlice";
+import {
+  login,
+  loginWithGoogle,
+  RESET,
+  sendLoginCode,
+} from "../../redux/features/auth/authSlice";
 import { GoogleLogin } from "@react-oauth/google";
+import "./AuthStyle.css";
 
 const initialState = {
   email: "",
@@ -16,6 +22,18 @@ const initialState = {
 export const Login = () => {
   const [formData, setFormData] = useState(initialState);
   const { email, password } = formData;
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const handleResize = () => {
+    setWindowSize(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +71,7 @@ export const Login = () => {
     }
 
     if (isError && twoFactor) {
-      dispatch(sendLoginCode(email))
+      dispatch(sendLoginCode(email));
       navigate(`/loginWithCode/${email}`);
     }
 
@@ -61,7 +79,9 @@ export const Login = () => {
   }, [isSuccess, isLoggedIn, isError, twoFactor, navigate, dispatch, email]);
 
   const googleLogin = async (credentialResponse) => {
-    await dispatch(loginWithGoogle({userToken: credentialResponse.credential }))
+    await dispatch(
+      loginWithGoogle({ userToken: credentialResponse.credential })
+    );
   };
 
   return (
@@ -85,17 +105,19 @@ export const Login = () => {
               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
             ></path>
           </svg>
-          <h4 className="mb-4 pb-3 text-light">Log In</h4>
-          <div className="--flex-center">
-          <GoogleLogin
+          <h4 className="authTitle">Log In</h4>
+          <div className="flex-center">
+            <GoogleLogin
               onSuccess={googleLogin}
               onError={() => {
                 toast.error("Login Failed");
               }}
+              type={windowSize < 360 ? "icon" : "standard"}
+              shape={windowSize < 360 ? "circle" : "rect"}
             />
           </div>
           <br />
-          <p className="text-light --text-center --fw-bold">or</p>
+          <p className="or">or</p>
           <form onSubmit={loginUser}>
             <div className="form-group">
               <input
@@ -112,7 +134,7 @@ export const Login = () => {
               <i className="input-icon uil uil-at"></i>
             </div>
             <PasswordInput
-              className="form-style"
+              className="form-style margin-top"
               id="loginPassword"
               autoComplete="off"
               placeholder="Your Password"
@@ -120,17 +142,14 @@ export const Login = () => {
               value={password}
               onChange={handleInputChange}
             />
-            <button
-              type="submit"
-              className="btn mt-4 --btn --btn-primary btn-block"
-            >
+            <button type="submit" className="btn fullWidth margin-top-3rem">
               Login
             </button>
           </form>
-          <p className="mb-0 mt-5 text-center">
+          <p className="custom-paragraph">
             <Link to="/forgot">Forgot your password?</Link>
           </p>
-          <p className="mb-0 mt-4 text-center">
+          <p className="custom-paragraph">
             <Link to="/">Back to Home</Link>
           </p>
         </div>

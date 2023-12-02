@@ -16,7 +16,7 @@ export const Loader = () => {
 
 export const Spinner = () => {
   return (
-    <div className="--center-all">
+    <div className="center-all">
       <img src={loaderImg} alt="spinner" />
     </div>
   );

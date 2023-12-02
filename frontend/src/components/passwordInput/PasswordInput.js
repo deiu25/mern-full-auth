@@ -15,7 +15,7 @@ export const PasswordInput = ({
     setShowPassword(!showPassword);
   };
   return (
-    <div className="form-group mt-2 position-relative">
+    <div className="form-group position-relative">
       <input
         type={showPassword ? "text" : "password"}
         name={name}

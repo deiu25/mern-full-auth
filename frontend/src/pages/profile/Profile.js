@@ -10,6 +10,7 @@ import {
 import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 import { Notification } from "../../components/notification/Notification";
+import "./Profile.css";
 
 export const shortenText = (text, maxLength) => {
   if (typeof text !== "string" || text.length <= maxLength) {
@@ -35,7 +36,7 @@ export const Profile = () => {
     bio: user?.bio || "",
     photo: user?.photo || "",
     role: user?.role || "",
-    isVerified: user?.isVerified || false,
+    isisVerified: user?.isVerified || "",
   };
 
   const [profile, setProfile] = useState(initialState);
@@ -96,18 +97,16 @@ export const Profile = () => {
     <>
       {isLoading && <Loader />}
       {!profile.isVerified && <Notification />}
-      <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="col-12 col-md-8">
-            <div className="card">
-              <div className="head-profile">
-                <PageMenu />
+      <div className="profile-container">
+        <div className="centered-row">
+          <div className="full-width medium-width">
+            <div className="custom-card">
+              <PageMenu />
+              <div className="custom-card-header centered-text">
+                <h2 className="textColor">Profile</h2>
               </div>
-              <div className="card-header text-center">
-                <h2>Profile</h2>
-              </div>
-              <div className="card-body">
-                <div className="text-center">
+              <div className="custom-card-body">
+                <div className="centered-text">
                   <input
                     type="file"
                     accept="image/*"
@@ -118,17 +117,16 @@ export const Profile = () => {
                   <img
                     src={imagePreview === null ? user?.photo : imagePreview}
                     alt="profileImg"
-                    className="rounded-circle mb-3"
-                    style={{ width: "150px", height: "150px" }}
+                    className="circle margin-bottom hover-effect"
                     onClick={() =>
                       document.getElementById("hiddenFileInput").click()
                     }
                   />
-                  <h3>Role: {profile.role}</h3>
+                  <h3 className="textColor">Role: {profile.role}</h3>
                 </div>
                 <form onSubmit={saveProfile}>
-                  <div className="form-group">
-                    <label>Change Photo</label>
+                  <label>Change Photo</label>
+                  <div className="custom-form-group">
                     <input
                       type="file"
                       accept="photo/*"
@@ -139,7 +137,7 @@ export const Profile = () => {
                   </div>
                   <div className="form-group form-group-flex">
                     <label htmlFor="firstname">First Name</label>
-                    <span className="input-icon mt-4">
+                    <span className="input-icon-custom">
                       <i className="uil uil-user"></i>
                     </span>
                     <input
@@ -153,7 +151,7 @@ export const Profile = () => {
                   </div>
                   <div className="form-group form-group-flex">
                     <label htmlFor="lastname">Last Name</label>
-                    <span className="input-icon mt-4">
+                    <span className="input-icon-custom">
                       <i className="uil uil-user"></i>
                     </span>
                     <input
@@ -169,8 +167,13 @@ export const Profile = () => {
                     className="email-input form-group form-group-flex"
                     style={{ position: "relative" }}
                   >
-                    <label htmlFor="email">Email</label>
-                    <span className="input-icon mt-4">
+                    <label htmlFor="email">
+                      Email{" "}
+                      <span className="hover-message">
+                        You cannot change your email address.
+                      </span>
+                    </label>
+                    <span className="input-icon-custom">
                       <i className="uil uil-at"></i>
                     </span>
                     <input
@@ -182,13 +185,10 @@ export const Profile = () => {
                       value={profile?.email}
                       onChange={handleInputChange}
                     />
-                    <span className="hover-message">
-                      You cannot change your email address.
-                    </span>
                   </div>
                   <div className="form-group form-group-flex">
                     <label htmlFor="phone">Phone</label>
-                    <span className="input-icon mt-4">
+                    <span className="input-icon-custom">
                       <i className="uil uil-phone"></i>
                     </span>
                     <input
@@ -202,32 +202,31 @@ export const Profile = () => {
                   </div>
                   <div className="form-group form-group-flex">
                     <label htmlFor="bio">Bio</label>
-                    <span className="input-icon">
+                    <span className="input-icon-custom">
                       <i className="uil uil-comment"></i>
                     </span>
                     <textarea
                       id="bio"
                       name="bio"
-                      className="form-control form-style"
-                      rows="5"
+                      className="textarea"
                       value={profile?.bio}
                       onChange={handleInputChange}
                     ></textarea>
                   </div>
-                  <div className="text-center mt-3">
-                    <button className="btn">Update Profile</button>
+                  <div className="centered-text margin-top">
+                    <button className="btn hover hover-effect">Update Profile</button>
                   </div>
                 </form>
               </div>
-              <div className="card-footer text-muted text-center">
+              <div className="custom-card-footer">
                 <h4>User</h4>
                 <p>
                   {profile.firstname} {profile.lastname}
                 </p>
                 <p>{profile.email}</p>
                 <p>{profile.phone}</p>
+                <p>Status: {profile.isVerified ? "Verified" : "Not Verified"}</p>
                 <p>Role: {profile.role}</p>
-                <p>{profile.isVerified}</p>
               </div>
             </div>
           </div>
