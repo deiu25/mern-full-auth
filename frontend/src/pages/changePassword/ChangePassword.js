@@ -20,6 +20,7 @@ const initialState = {
 };
 
 export const ChangePassword = () => {
+
   const [formData, setFormData] = useState(initialState);
   const { oldPassword, newPassword, confirmPassword } = formData;
 
