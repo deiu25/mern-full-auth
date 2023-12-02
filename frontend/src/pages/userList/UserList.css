@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 
-body{
-	font-family: 'Poppins', sans-serif;
-	font-weight: 300;
-	font-size: 15px;
-	line-height: 1.7;
-	color: #c4c3ca;
-	background-color: #1f2029;
-	overflow-x: hidden;
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #c4c3ca;
+  background-color: #1f2029;
+  overflow-x: hidden;
 }
 a {
-	cursor: pointer;
+  cursor: pointer;
   transition: all 200ms linear;
 }
 a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 p {
   font-weight: 500;
@@ -24,7 +24,7 @@ p {
 h4 {
   font-weight: 600;
 }
-h6 span{
+h6 span {
   padding: 0 20px;
   text-transform: uppercase;
   font-weight: 700;
@@ -80,7 +80,7 @@ h6 span{
   color: #333;
 }
 
-.allUsers{
+.allUsers {
   margin-top: 12px;
   color: #fff;
 }
@@ -182,11 +182,9 @@ h6 span{
 
 .pagination .activePage {
   color: #fff;
-  background-color: #2553d3; 
-  border-radius: 5px; 
+  background-color: #2553d3;
+  border-radius: 5px;
 }
-
-
 
 @media (max-width: 768px) {
   .user-list .table table {

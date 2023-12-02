@@ -1,8 +1,8 @@
 import React from 'react'
 import './Home.css'
 import loginImg from '../../assets/login.svg'
-import { Link } from 'react-router-dom'
 import { ShowOnLogout } from '../../components/protect/hiddenLink'
+import LinkButton from '../../components/button/LinkButton'
 
 export const Home = () => {
   return (
@@ -15,7 +15,7 @@ export const Home = () => {
         <p>Take the first step!</p>
         <div className='hero-buttons flex-start'>
         <ShowOnLogout>
-            <Link className="btn" to='/auth'>Auth</Link>
+            <LinkButton to='/auth'>Auth</LinkButton>
         </ShowOnLogout>
         </div>
         </div>

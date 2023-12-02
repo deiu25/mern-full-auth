@@ -77,18 +77,18 @@ export const UserList = () => {
   return (
     <div className="custom-card margin-top-2">
       <div className="custom-card-header centered-text">
-      <PageMenu />
-      <UserStats />
+        <PageMenu />
+        <UserStats />
       </div>
       <div className="user-list">
         {isLoading && <Spinner />}
         {error && <p>Error: {error}</p>}
         <div className="table">
           <>
-                <Search
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+            <Search
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </>
           <>
             <h3 className="allUsers">All Users</h3>
@@ -139,20 +139,22 @@ export const UserList = () => {
           )}
           <hr />
         </div>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="Next"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          pageCount={pageCount}
-          previousLabel="Prev"
-          renderOnZeroPageCount={null}
-          containerClassName="pagination"
-          pageLinkClassName="page-num"
-          previousLinkClassName="page-num"
-          nextLinkClassName="page-num"
-          activeLinkClassName="activePage"
-        />
+        <div className="pagination-div">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            previousLabel="Prev"
+            renderOnZeroPageCount={null}
+            containerClassName="pagination"
+            pageLinkClassName="page-num"
+            previousLinkClassName="page-num"
+            nextLinkClassName="page-num"
+            activeLinkClassName="activePage"
+          />
+        </div>
       </div>
     </div>
   );

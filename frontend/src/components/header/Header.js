@@ -5,6 +5,7 @@ import { RESET, logout } from "../../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { ShowOnLogin, ShowOnLogout } from "../protect/hiddenLink";
 import { UserName } from "../../pages/profile/Profile";
+import LinkButton from "../button/LinkButton";
 
 const activeLink = ({ isActive }) => (isActive ? "active" : "");
 
@@ -47,9 +48,7 @@ export const Header = () => {
         </label>
         <ul>
           <ShowOnLogout>
-            <Link className="btn" to="/auth">
-              Auth
-            </Link>
+          <LinkButton to='/auth'>Auth</LinkButton>
           </ShowOnLogout>
           <ShowOnLogin>
             <li>
@@ -59,7 +58,7 @@ export const Header = () => {
             </li>
 
             <li>
-              <button onClick={logoutUser} className="btn btn-secondary">
+              <button onClick={logoutUser} className="logout-btn">
                 Logout
               </button>
             </li>

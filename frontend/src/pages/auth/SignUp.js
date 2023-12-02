@@ -11,6 +11,7 @@ import {
 } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
 import './AuthStyle.css'
+import Button from "../../components/button/Button";
 
 const initialState = {
   firstname: "",
@@ -229,9 +230,7 @@ export const SignUp = () => {
                 At least 1 special character
               </div>
             </div>
-            <button type="submit" className="btn mt-4">
-              Submit
-            </button>
+            <Button type="submit">Submit</Button>
           </form>
           <p className="custom-paragraph">
             <Link to="/forgot">Forgot your password?</Link>

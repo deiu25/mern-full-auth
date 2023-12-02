@@ -11,6 +11,7 @@ import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 import { Notification } from "../../components/notification/Notification";
 import "./Profile.css";
+import Button from "../../components/button/Button";
 
 export const shortenText = (text, maxLength) => {
   if (typeof text !== "string" || text.length <= maxLength) {
@@ -214,7 +215,7 @@ export const Profile = () => {
                     ></textarea>
                   </div>
                   <div className="centered-text margin-top">
-                    <button className="btn hover hover-effect">Update Profile</button>
+                    <Button>Update Profile</Button>
                   </div>
                 </form>
               </div>

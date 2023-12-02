@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { RESET, loginWithCode, sendLoginCode } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
 import './AuthStyle.css'
+import Button from "../../components/button/Button";
 
 export const LoginWithCode = () => {
     const [loginCode, setLoginCode] = useState("");
@@ -93,12 +94,8 @@ export const LoginWithCode = () => {
                             />
                             <i className="input-icon uil uil-at"></i>
                           </div>
-                          <button
-                            type="submit"
-                            className="btn fullWidth margin-top-3rem"
-                          >
-                            Proced To Login
-                          </button>
+                          <Button>Proced To Login</Button>
+                          <br />
                           <span className="forgotParagraph">
                             Check your email for the access code.
                             </span>

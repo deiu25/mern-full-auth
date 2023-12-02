@@ -13,6 +13,7 @@ import {
 } from "../../redux/features/auth/authSlice";
 import { GoogleLogin } from "@react-oauth/google";
 import "./AuthStyle.css";
+import Button from "../../components/button/Button";
 
 const initialState = {
   email: "",
@@ -142,9 +143,7 @@ export const Login = () => {
               value={password}
               onChange={handleInputChange}
             />
-            <button type="submit" className="btn fullWidth margin-top-3rem">
-              Login
-            </button>
+            <Button>Login</Button>
           </form>
           <p className="custom-paragraph">
             <Link to="/forgot">Forgot your password?</Link>

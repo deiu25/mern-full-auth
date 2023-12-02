@@ -5,6 +5,7 @@ import { validateEmail } from "../../redux/features/auth/authService";
 import { useDispatch, useSelector } from "react-redux";
 import { RESET, forgotPassword } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
+import Button from "../../components/button/Button";
 
 export const Forgot = () => {
   const [email, setEmail] = useState("");
@@ -78,12 +79,7 @@ export const Forgot = () => {
                             />
                             <i className="input-icon uil uil-at"></i>
                           </div>
-                          <button
-                            type="submit"
-                            className="btn fullWidth margin-top-3rem"
-                          >
-                            Send Reset Link
-                          </button>
+                          <Button>Send Reset Link</Button>
                         </form>
                         <p className="custom-paragraph">
                           <Link to="/auth">Back to Login</Link>

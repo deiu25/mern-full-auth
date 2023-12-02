@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RESET, resetPassword } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import './AuthStyle.css'
+import Button from "../../components/button/Button";
 
 const initialState = {
   password: "",
@@ -160,12 +161,7 @@ export const Reset = () => {
                               onChange={handleInputChange}
                             />
                           </div>
-                          <button
-                            type="submit"
-                            className="btn fullWidth margin-top-3rem"
-                          >
-                            Reset Password
-                          </button>
+                          <Button>Reset Password</Button>
                         </form>
                         <div className="password-info">
                           <div className="password-info-item">

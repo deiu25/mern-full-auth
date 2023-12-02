@@ -12,6 +12,7 @@ import {
 import { Spinner } from "../../components/loader/Loader";
 import { sendAutomatedEmail } from "../../redux/features/email/emailSlice";
 import "./ChangePassword.css";
+import Button from "../../components/button/Button";
 
 const initialState = {
   oldPassword: "",
@@ -198,9 +199,7 @@ export const ChangePassword = () => {
                   <Spinner />
                 ) : (
                   <div className="centered-text margin-top-2">
-                    <button type="submit" className="btn">
-                      Change Password
-                    </button>
+                    <Button type="submit">Change Password</Button>
                   </div>
                 )}
               </form>
