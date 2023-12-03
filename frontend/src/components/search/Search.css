@@ -6,15 +6,12 @@
   align-items: center;
   background-color: #f2f2f2;
   border-radius: 25px;
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 1rem;
   transition: box-shadow 0.3s ease;
-}
-
-.search:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.search .icon {
+.search .icon-search {
   color: #777;
 }
 
@@ -23,22 +20,7 @@
   border: none;
   background: transparent;
   margin-left: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   outline: none;
-  transition: all 0.3s ease;
-}
-
-.searchInput::placeholder {
-  color: #777;
-}
-
-.searchInput:focus {
-  border: none;
-  color: #333;
-}
-
-.searchInput:focus ~ .icon {
-  color: #333;
-  transform: scale(1.2);
   transition: all 0.3s ease;
 }
