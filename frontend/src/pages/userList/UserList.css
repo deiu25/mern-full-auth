@@ -1,35 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 
-body {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #c4c3ca;
-  background-color: #1f2029;
-  overflow-x: hidden;
-}
-a {
-  cursor: pointer;
-  transition: all 200ms linear;
-}
-a:hover {
-  text-decoration: none;
-}
-p {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.7;
-}
-h4 {
-  font-weight: 600;
-}
-h6 span {
-  padding: 0 20px;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
 .flex-between {
   display: flex;
   flex-direction: row;
@@ -176,24 +146,190 @@ h6 span {
 .pagination {
   display: flex;
   justify-content: center;
-  margin: 25px 0;
-  font-weight: 300;
+  padding: 20px 0;
+  list-style: none;
 }
 
-.pagination .activePage {
-  color: #fff;
-  background-color: #2553d3;
+.page-num {
+  margin: 0 3px;
+  padding: 10px 15px;
   border-radius: 5px;
+  border: 1px solid #007bff;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s linear;
+}
+
+.page-num:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.activePage {
+  background-color: #007bff;
+  color: #fff;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
   .user-list .table table {
     font-size: 1.2rem;
   }
+
+  .user-list .table .search {
+    max-width: 100%;
+  }
+
+  .user-list .table table th,
+  .user-list .table table td {
+    padding: 5px;
+  }
+
+  .user-list .table table th.icons > *,
+  .user-list .table table td.icons > * {
+    margin-right: 5px;
+  }
+
+  .sort label {
+    font-size: 1.2rem;
+  }
+
+  .sort select {
+    font-size: 1.4rem;
+  }
+
+  .page-num {
+    padding: 5px 10px;
+  }
+
+  .pagination {
+    padding: 10px 0;
+  }
+
+  .margin-top-2 {
+    margin-top: 1rem;
+  }
+
+  .custom-card {
+    padding: 0.5rem;
+  }
+
+  .custom-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .custom-card p {
+    font-size: 1.2rem;
+  }
+
+  .custom-card .flex-between {
+    flex-direction: column;
+  }
+
+  .custom-card .flex-between h3 {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .custom-card .flex-between .btn {
+    margin-top: 10px;
+  }
+
+  .custom-card .flex-between .btn:last-child {
+    margin-top: 0;
+  }
+
+  .custom-card .flex-between .btn:first-child {
+    margin-right: 0;
+  }
+
+  .custom-card .flex-between .btn:last-child {
+    margin-right: 0;
+  }
+
+  .custom-card .flex-between .btn {
+    width: 100%;
+  }
 }
 
 @media (max-width: 576px) {
   .user-list .table table {
     font-size: 1rem;
+  }
+
+  .user-list .table .search {
+    max-width: 100%;
+  }
+
+  .user-list .table table th,
+  .user-list .table table td {
+    padding: 5px;
+  }
+
+  .user-list .table table th.icons > *,
+  .user-list .table table td.icons > * {
+    margin-right: 5px;
+  }
+
+  .sort label {
+    font-size: 1.2rem;
+  }
+
+  .sort select {
+    font-size: 1.4rem;
+  }
+
+  .page-num {
+    padding: 5px 10px;
+  }
+
+  .pagination {
+    padding: 10px 0;
+  }
+
+  .margin-top-2 {
+    margin-top: 1rem;
+  }
+
+  .custom-card {
+    padding: 0.5rem;
+  }
+
+  .custom-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .custom-card p {
+    font-size: 1.2rem;
+  }
+
+  .custom-card .flex-between {
+    flex-direction: column;
+  }
+
+  .custom-card .flex-between h3 {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .custom-card .flex-between .btn {
+    margin-top: 10px;
+  }
+
+  .custom-card .flex-between .btn:last-child {
+    margin-top: 0;
+  }
+
+  .custom-card .flex-between .btn:first-child {
+    margin-right: 0;
+  }
+
+  .custom-card .flex-between .btn:last-child {
+    margin-right: 0;
+  }
+
+  .custom-card .flex-between .btn {
+    width: 100%;
   }
 }
