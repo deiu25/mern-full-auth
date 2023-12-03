@@ -8,8 +8,9 @@ import {
   sendAutomatedEmail,
 } from "../../redux/features/email/emailSlice";
 import "./ChangeRole.css";
+import Button from "../button/Button";
 
-export const ChangeRole = ({_id, email}) => {
+export const ChangeRole = ({ _id, email }) => {
   const [userRole, setUserRole] = useState("");
   const dispatch = useDispatch();
 
@@ -42,10 +43,7 @@ export const ChangeRole = ({_id, email}) => {
 
   return (
     <div className="sort">
-      <form
-        className=""
-        onSubmit={(e) => changeRole(e, _id, userRole)}
-      >
+      <form className="" onSubmit={(e) => changeRole(e, _id, userRole)}>
         <select value={userRole} onChange={(e) => setUserRole(e.target.value)}>
           <option value="">-- select --</option>
           <option value="subscriber">Subscriber</option>
@@ -53,9 +51,9 @@ export const ChangeRole = ({_id, email}) => {
           <option value="admin">Admin</option>
           <option value="suspended">Suspended</option>
         </select>
-        <button className="btn-primary btn-check">
+        <Button>
           <FaCheck size={15} />
-        </button>
+        </Button>
       </form>
     </div>
   );
