@@ -34,37 +34,37 @@ function App() {
   }, [dispatch, isLoggedIn, user]);
 
   return (
-    <>
-    <BrowserRouter>
-      <ToastContainer />
-        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-          <Routes>
-            <Route path="/" element={<Leyout>
-              <Home />
-            </Leyout>} />
+    <div className='auth-body'>
+      <BrowserRouter>
+        <ToastContainer />
+          <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+            <Routes>
+              <Route path="/" element={<Leyout>
+                <Home />
+              </Leyout>} />
 
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/forgot" element={<Forgot />} />
-            <Route path="/resetPassword/:resetToken" element={<Reset />} />
-            <Route path="/loginWithCode/:email" element={<LoginWithCode />} />
-          
-            <Route path="/verify/:verificationToken" element={<Leyout>
-              <Verify />
-            </Leyout>} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/forgot" element={<Forgot />} />
+              <Route path="/resetPassword/:resetToken" element={<Reset />} />
+              <Route path="/loginWithCode/:email" element={<LoginWithCode />} />
+            
+              <Route path="/verify/:verificationToken" element={<Leyout>
+                <Verify />
+              </Leyout>} />
 
-            <Route path="/profile" element={<Leyout>
-              <Profile />
-            </Leyout>} />
-            <Route path="/changePassword" element={<Leyout>
-              <ChangePassword />
-            </Leyout>} />
-            <Route path="/users" element={<Leyout>
-              <UserList />
-            </Leyout>} />
-          </Routes>
-        </GoogleOAuthProvider>
-    </BrowserRouter>
-    </>
+              <Route path="/profile" element={<Leyout>
+                <Profile />
+              </Leyout>} />
+              <Route path="/changePassword" element={<Leyout>
+                <ChangePassword />
+              </Leyout>} />
+              <Route path="/users" element={<Leyout>
+                <UserList />
+              </Leyout>} />
+            </Routes>
+          </GoogleOAuthProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 

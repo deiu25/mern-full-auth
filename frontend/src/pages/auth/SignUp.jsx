@@ -1,3 +1,4 @@
+import './AuthStyle.css'
 import React, { useEffect, useState } from "react";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +11,6 @@ import {
   sendVerificationEmail,
 } from "../../redux/features/auth/authSlice";
 import { Loader } from "../../components/loader/Loader";
-import './AuthStyle.css'
 import Button from "../../components/button/Button";
 
 const initialState = {
