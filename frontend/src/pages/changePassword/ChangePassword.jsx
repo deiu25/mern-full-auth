@@ -21,7 +21,6 @@ const initialState = {
 };
 
 export const ChangePassword = () => {
-
   const [formData, setFormData] = useState(initialState);
   const { oldPassword, newPassword, confirmPassword } = formData;
 
@@ -133,7 +132,7 @@ export const ChangePassword = () => {
   return (
     <div className="change-pass-container margin-top">
       <div className="centered-row">
-        <div className="full-width medium-width">
+        <div className="full-width">
           <div className="custom-card">
             <PageMenu />
             <div className="custom-card-header centered-text">

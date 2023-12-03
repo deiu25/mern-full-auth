@@ -10,24 +10,6 @@
   margin-right: 20px;
 }
 
-.profile-container {
-  max-width: 850px;
-  margin: 3rem auto 0;
-  padding: 0 20px;
-}
-
-.centered-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-}
-
-.full-width {
-  width: 100%;
-}
-
 .margin-top-2 {
   margin-top: 2rem;
 }

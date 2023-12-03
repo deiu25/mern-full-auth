@@ -1,3 +1,4 @@
+import "./Profile.css";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { PageMenu } from "../../components/pageMenu/PageMenu";
 import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutUser";
@@ -10,7 +11,6 @@ import {
 import { Loader } from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 import { Notification } from "../../components/notification/Notification";
-import "./Profile.css";
 import Button from "../../components/button/Button";
 
 export const shortenText = (text, maxLength) => {
@@ -100,7 +100,7 @@ export const Profile = () => {
       {!profile.isVerified && <Notification />}
       <div className="profile-container">
         <div className="centered-row">
-          <div className="full-width medium-width">
+          <div className="full-width">
             <div className="custom-card">
               <PageMenu />
               <div className="custom-card-header centered-text">
@@ -226,7 +226,9 @@ export const Profile = () => {
                 </p>
                 <p>{profile.email}</p>
                 <p>{profile.phone}</p>
-                <p>Status: {profile.isVerified ? "Verified" : "Not Verified"}</p>
+                <p>
+                  Status: {profile.isVerified ? "Verified" : "Not Verified"}
+                </p>
                 <p>Role: {profile.role}</p>
               </div>
             </div>

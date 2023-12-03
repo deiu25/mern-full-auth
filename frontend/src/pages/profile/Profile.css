@@ -1,44 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 
-body {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #c4c3ca;
-  background-color: #1f2029;
-  overflow-x: hidden;
-}
-a {
-  cursor: pointer;
-  transition: all 200ms linear;
-}
-a:hover {
-  text-decoration: none;
-}
-.link {
-  color: #c4c3ca;
-}
-.link:hover {
-  color: #a7b0ff;
-}
-.textColor {
-  color: #fff;
-}
-p {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.7;
-}
-h4 {
-  font-weight: 600;
-}
-h6 span {
-  padding: 0 20px;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
 .profile-container {
   max-width: 850px;
   margin: 3rem auto 0;
@@ -62,21 +23,7 @@ h6 span {
 }
 
 .full-width {
-  width: 100%;
-}
-
-.custom-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #2a2b38;
-  background-clip: border-box;
-  border: 1px solid #fff;
-  border-radius: 0.25rem;
-  box-shadow: 0 0.5rem 1rem #fff;
-  padding: 1.25rem;
+  width: 100% !important;
 }
 
 .custom-card-header {
@@ -270,7 +217,7 @@ h6 span {
 .email-input:hover .hover-message {
   visibility: visible;
   opacity: 1;
-  color:rgb(236, 36, 36);
+  color: rgb(236, 36, 36);
 }
 
 .textarea {
@@ -286,7 +233,7 @@ h6 span {
 }
 
 @media (min-width: 768px) {
-  .medium-width {
+  .full-width {
     width: 66.67%;
   }
 }
