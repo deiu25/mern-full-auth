@@ -1,4 +1,4 @@
-nav {
+.navbar {
   display: flex;
   justify-content: space-between;
   padding: 15px 5%;
@@ -6,41 +6,29 @@ nav {
   background-color: #1f2029;
 }
 
-.logo {
+.nav-logo {
   font-size: 1.8rem;
   font-weight: 700;
   color: #fff;
   text-decoration: none;
-  margin-right: 4%;
   cursor: pointer;
-}
-
-.logout-btn {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
-  background: transparent;
-  padding: 10px 20px;
   transition-duration: 0.4s;
-  cursor: pointer;
 }
 
-.logout-btn:hover {
-  box-shadow: 0 0 15px #fff;
+.nav-logo:hover {
+  text-shadow: 0 0 20px #fff;
 }
 
-ul {
+.navbar-list {
   list-style: none;
 }
 
-ul li {
+.navbar-list li {
   display: inline-block;
   margin-left: 20px;
 }
 
-ul li a {
+.navbar-list li a {
   font-size: 1.2rem;
   color: #fff;
   text-decoration: none;
@@ -50,8 +38,8 @@ ul li a {
   transition: all 0.3s ease;
 }
 
-ul li a:hover,
-ul li a.active {
+.navbar-list li a:hover,
+.navbar-list li a.active {
   background-color: #fff;
   color: #1f2029;
 }
@@ -73,7 +61,7 @@ ul li a.active {
 }
 
 @media screen and (max-width: 768px) {
-  ul {
+  .navbar-list {
     position: fixed;
     top: 50px;
     left: 0;
@@ -83,17 +71,18 @@ ul li a.active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    padding: 35vh 0;
     transition: 0.5s ease-in-out;
     opacity: 0;
     z-index: -1;
   }
 
-  ul li {
+  .navbar-list li {
     display: block;
   }
 
-  ul li a {
+  .navbar-list li a {
     font-size: 1.5rem;
     color: #fff;
     text-decoration: none;
@@ -116,7 +105,7 @@ ul li a.active {
   .logo h1 {
     font-size: 2.5rem;
   }
-  nav {
+  .navbar {
     margin-bottom: 3rem;
   }
 }

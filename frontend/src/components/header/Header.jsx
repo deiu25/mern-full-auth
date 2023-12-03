@@ -1,11 +1,12 @@
 import React from "react";
 import "./Header.css";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RESET, logout } from "../../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { ShowOnLogin, ShowOnLogout } from "../protect/hiddenLink";
 import { UserName } from "../../pages/profile/Profile";
 import LinkButton from "../button/LinkButton";
+import { Logout } from "../button/Logout";
 
 const activeLink = ({ isActive }) => (isActive ? "active" : "");
 
@@ -25,8 +26,8 @@ export const Header = () => {
 
   return (
     <header>
-      <nav>
-        <div className="logo" onClick={goHome}>
+      <nav className="navbar">
+        <div className="nav-logo" onClick={goHome}>
           <h1>SyntaxSeeker</h1>
         </div>
         <input type="checkbox" id="checkbox" />
@@ -46,9 +47,9 @@ export const Header = () => {
             ></path>
           </svg>
         </label>
-        <ul>
+        <ul className="navbar-list">
           <ShowOnLogout>
-          <LinkButton to='/auth'>Auth</LinkButton>
+            <LinkButton to="/auth">Auth</LinkButton>
           </ShowOnLogout>
           <ShowOnLogin>
             <li>
@@ -56,11 +57,8 @@ export const Header = () => {
                 <UserName />
               </NavLink>
             </li>
-
             <li>
-              <button onClick={logoutUser} className="logout-btn">
-                Logout
-              </button>
+              <Logout onClick={logoutUser} />
             </li>
           </ShowOnLogin>
         </ul>
